@@ -153,3 +153,16 @@ const formatClock = format => (
               .replace('tt', time.ampm)
     )
 )
+
+// accepts an object's key, and prepends a zero to the value stored in that object's key.
+// it takes in a key to a specific field and prepends values with a zero,
+// if the value is less than 10
+const prependZero = key => (
+    clockTime => (
+        {
+            ...clockTime,
+            [key]: (clockTime[key] < 10) ? "0" + clockTime[key] : clockTime[key]
+        }
+    )
+)
+
