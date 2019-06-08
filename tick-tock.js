@@ -127,3 +127,11 @@ const appendAMPM = clockTime => (
         ampm: (clockTime.hours >= 12) ? "PM" : "AM"
     }
 )
+
+/**
+ * Next, we need some higher order functions.
+ * These higher-order functions will be used to create other functions which shall
+ * be reused to format the clock time for every tick. 
+ * Both formatClock() and prependZero() will be called once, initially to set up a required template/key. 
+ * The inner functions that they return will be invoked once every second to format the time for display.
+ */
