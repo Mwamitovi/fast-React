@@ -66,7 +66,12 @@ function getClockTime(){
 /**
  * -- Functional approach-- 
  * 
- * Our goal is to break the application logic up into smaller parts, functions.
+ * Following these three simple rules will help you stay functional:
+ * // 1. Keep data immutable.
+ * // 2. Keep functions pure — accept at least one argument, return data or another function.
+ * // 3. Use recursion over looping (wherever possible).
+ * 
+ * So our goal is to break the application logic up into smaller parts, functions.
  * Each function will be focused on a single task, 
  * and we will compose them into larger functions so as to create the clock.
  */
@@ -85,3 +90,10 @@ const getCurrentTime = () => new Date()
 const clear = () => console.clear()
 // function to log messages on the console
 const log = message => console.log(message)
+
+/**
+ * Next, let's define some functions to transform our data.
+ * These functions shall be utilized to mutate the Date() object
+ * into an object that can be used for our clock.
+ */
+
