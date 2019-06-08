@@ -64,7 +64,7 @@ function getClockTime(){
  
 
 /**
- * -- Functional approach-- 
+ * -- Functional/declarative approach-- 
  * 
  * Following these three simple rules will help you stay functional:
  * // 1. Keep data immutable.
@@ -190,3 +190,33 @@ const doubleDigits = civilianTime => (
         prependZero('seconds'),
     )(civilianTime)
 )
+
+// Finally, let's define a function to utilize all the above functions
+const startTicking = () => (
+    setInterval(
+        compose(
+            clear,
+            getCurrentTime,
+            serializeClockTime,
+            convertToCivilianTime,
+            doubleDigits,
+            formatClock("hh:mm:ss tt"),
+            display(log)
+        ),
+        oneSecond()
+    )
+)
+
+/**
+ * This declarative clock version achieves the same results as the imperative version.
+ * However, there some few benefits to this approach. 
+ * // - First, all of these functions are easily testable and reusable. 
+ * // - They can be used in future clocks or other digital displays.
+ * // - Also, this program is easily scalable. 
+ * // - There are no side effects. 
+ * // - There are no global variables outside of functions themselves.
+ * // - There could still be bugs, but they will be easier to find.
+ */
+
+// calling our function
+startTicking()
