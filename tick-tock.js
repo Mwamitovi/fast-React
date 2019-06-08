@@ -107,3 +107,12 @@ const serializeClockTime = date => (
     }
 )
 
+// accepts, clock time object, and returns
+// an object where hours are converted into civilian time.
+// for example: 1300 becomes 1 o'clock
+const civilianHours = clockTime => (
+    {
+        ...clockTime,
+        hours: (clockTime.hours > 12) ? clockTime.hours - 12 : clockTime.hours
+    }
+)
