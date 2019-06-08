@@ -166,3 +166,7 @@ const prependZero = key => (
     )
 )
 
+/**
+ * Now that we have all of the functions required, we shall need to compose them. 
+ * We will use the compose() function to handle this composition.
+ */
