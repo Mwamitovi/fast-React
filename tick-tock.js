@@ -135,3 +135,9 @@ const appendAMPM = clockTime => (
  * Both formatClock() and prependZero() will be called once, initially to set up a required template/key. 
  * The inner functions that they return will be invoked once every second to format the time for display.
  */
+
+// accepts a target function, and returns a function which will
+// send a time to the target. (our target will be console.log)
+const display = target => (
+    time => target(time)
+)
