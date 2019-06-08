@@ -10,7 +10,11 @@
  */
 
 /**
- * Imperative approach
+ * -- Imperative approach --
+ * 
+ * Here, the comments help one understand what's happening. 
+ * However, these functions are large and complicated. Each function does a lot. 
+ * They are hard to comprehend, tough to maintain and require comments.
  */
 
 // Log clock time every second
@@ -58,3 +62,26 @@ function getClockTime(){
     return time.hours + ":" + time.minutes + ":" + time.seconds + " " + time.ampm;
 }
  
+
+/**
+ * -- Functional approach-- 
+ * 
+ * Our goal is to break the application logic up into smaller parts, functions.
+ * Each function will be focused on a single task, 
+ * and we will compose them into larger functions so as to create the clock.
+ */
+
+/**
+ * In functional programs, we should use functions over values wherever possible.
+ * So first create some functions that return values and manage the console
+ * We shall call these functions to obtain the values when needed.
+ */
+
+// function that returns one second
+const oneSecond = () => 1000
+// function that returns the current time
+const getCurrentTime = () => new Date()
+// function to clear the console
+const clear = () => console.clear()
+// function to log messages on the console
+const log = message => console.log(message)
