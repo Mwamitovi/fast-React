@@ -16,7 +16,7 @@
 // Log clock time every second
 setInterval(logClockTime, 1000);
 
-function logClockTIme(){
+function logClockTime(){
     // get time string as civilian time
     var time = getClockTime();
     // clear the console and log the current time
