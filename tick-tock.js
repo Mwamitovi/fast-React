@@ -9,5 +9,20 @@
  * The clock must also tick and change the display every second.
  */
 
+/**
+ * Imperative approach
+ */
+
+// Log clock time every second
+setInterval(logClockTime, 1000);
+
+function logClockTIme(){
+    // get time string as civilian time
+    var time = getClockTime();
+    // clear the console and log the current time
+    console.clear();
+    console.log(time);
+}
+
 
  
