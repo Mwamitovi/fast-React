@@ -174,5 +174,19 @@ const prependZero = key => (
 // accepts clock time, and transforms it into 
 // civilian time by using both civilian hours
 const convertToCivilianTime = clockTime => (
-    compose(appendAMPM, civilianHours)(clockTime)
+    compose(
+        appendAMPM, 
+        civilianHours
+    )(clockTime)
+)
+
+// accepts civilian clock time, and makes sure that
+// hours, minutes, and seconds display double digits
+// by prepending zeros where necessary
+const doubleDigits = civilianTime => (
+    compose(
+        prependZero('hours'),
+        prependZero('minutes'),
+        prependZero('seconds'),
+    )(civilianTime)
 )
