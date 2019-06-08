@@ -95,6 +95,8 @@ const log = message => console.log(message)
  * Next, let's define some functions to transform our data.
  * These functions shall be utilized to mutate the Date() object
  * into an object that can be used for our clock.
+ * Note that these functions transform data without changing the original.
+ * They treat their arguments as immutable objects.
  */
 
 // accepts argument, date object, and returns 
@@ -114,5 +116,14 @@ const civilianHours = clockTime => (
     {
         ...clockTime,
         hours: (clockTime.hours > 12) ? clockTime.hours - 12 : clockTime.hours
+    }
+)
+
+// accepts clock time object, 
+// and appends time of the day, AM or Pm, to that object
+const appendAMPM = clockTime => (
+    {
+        ...clockTime,
+        ampm: (clockTime.hours >= 12) ? "PM" : "AM"
     }
 )
