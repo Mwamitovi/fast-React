@@ -137,7 +137,19 @@ const appendAMPM = clockTime => (
  */
 
 // accepts a target function, and returns a function which will
-// send a time to the target. (our target will be console.log)
+// send a time to the target. (Our target will be console.log)
 const display = target => (
     time => target(time)
+)
+
+// accepts a template string, and uses it to return clock time formatted based upon
+// the criteria from the string. (Our template is "hh:mm:ss tt")
+// We replace those placeholders with actual values
+const formatClock = format => (
+    time => (
+        format.replace('hh', time.hours)
+              .replace('mm', time.minutes)
+              .replace('ss', time.seconds)
+              .replace('tt', time.ampm)
+    )
 )
