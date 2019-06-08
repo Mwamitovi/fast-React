@@ -166,6 +166,18 @@ const prependZero = key => (
     )
 )
 
+// defining compose()
+// accepts functions, as arguments, and returns a single function
+// spread(...) turns the function arguments into an array called fns[]
+const compose = (...fns) => (
+    (arg) => (
+        // remember reduce() accepts (array, fn, initialValue)       
+        fns.reduce(
+            (composed, fn) => fn(composed), arg
+        )
+    )
+)
+
 /**
  * Now that we have all of the functions required, we shall need to compose them. 
  * We will use the compose() function to handle this composition.
