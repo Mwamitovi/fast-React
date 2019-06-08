@@ -97,3 +97,13 @@ const log = message => console.log(message)
  * into an object that can be used for our clock.
  */
 
+// accepts argument, date object, and returns 
+// an object for clock time having hours, minutes and seconds
+const serializeClockTime = date => (
+    {
+        hours: date.getHours(),
+        minutes: date.getMinutes(),
+        seconds: date.getSeconds()
+    }
+)
+
