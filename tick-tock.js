@@ -170,3 +170,9 @@ const prependZero = key => (
  * Now that we have all of the functions required, we shall need to compose them. 
  * We will use the compose() function to handle this composition.
  */
+
+// accepts clock time, and transforms it into 
+// civilian time by using both civilian hours
+const convertToCivilianTime = clockTime => (
+    compose(appendAMPM, civilianHours)(clockTime)
+)
