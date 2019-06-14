@@ -4,6 +4,12 @@
  * 
  * Using ES6 and JSX to develop an app,
  * which simply displays ingredients and some cooking instructions.
+ * We can create a UI for these recipes with two components: 
+ * // - a Menu component for listing the recipes, and
+ * // - a Recipe component that describes the UI for each recipe. 
+ * 
+ * It’s the Menu component that we will render to the DOM. 
+ * We shall pass our data to the Menu component as a property called `recipes`.
  */
 
 /**
@@ -13,7 +19,7 @@
  * a list of the ingredients required,
  * and a list of steps necessary to cook the recipe.
  */
-// Array of recipes
+// The data, an array of objects
 const data = [
     {
         "name": "Baked Salmon",
@@ -50,3 +56,37 @@ const data = [
         ]
     }
 ]
+
+/**
+ * Recipe component
+ * This is a stateless functional component. 
+ * Each recipe has a string for the name, an array of objects for ingredients, 
+ * and an array of strings for the steps.
+ * 
+ * Using ES6 object destructuring, 
+ * we set this component to locally scope those fields by name so we can 
+ * access them directly without having to use props.name, or props.ingredients, props.steps.
+ * We set "id" the root <section> element, 
+ * by converting the recipe’s name to a lowercase string and globally replace spaces with dashes.
+ * Thus “Baked Salmon” becomes “baked-salmon”, then used as the id attribute in our UI.
+ * Then use javascript expressions to map each ingredient/step to be displayed.
+ * Remember map() is returning an array of child elements.
+ */
+// For an individual Recipe
+const Recipe = ({ name, ingredients, steps }) => (
+    <section id={name.toLowerCase().replace(/ /g, "-")}>
+      <h1>{name}</h1>
+      <ul className="ingredients">
+        {ingredients.map(
+            (ingredient, i) => <li key={i}>{ingredient.name}</li>
+        )}
+      </ul>
+      <section className="instructions">
+      <h2>Cooking Instructions</h2>
+        {steps.map(
+            (step, i) => <p key={i}>{step}</p>
+        )}
+      </section>
+    </section>
+)
+
