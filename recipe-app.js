@@ -59,7 +59,7 @@ const data = [
 
 /**
  * Recipe component
- * This is a stateless functional component. 
+ * This is a stateless functional component, expressed as JSX.
  * Each recipe has a string for the name, an array of objects for ingredients, 
  * and an array of strings for the steps.
  * 
@@ -90,3 +90,27 @@ const Recipe = ({ name, ingredients, steps }) => (
     </section>
 )
 
+/**
+ * Menu Component
+ * This is also a stateless function component, expressed as JSX.
+ * Everything is contained within an article element. 
+ * A header, <h1>, and `div.recipes` elements are used to describe the DOM for our menu.
+ * 
+ * We use the JSX spread operator (...) and object destructuring too here.
+ * (...) adds each field of the recipe object, as a property of the Recipe component,
+ * so it helps us avoid calling name, ingredients and stesps directly.
+ * While object destructuring helps us call title and recipes directly, without `props`
+ */
+// For the Menu of Recipes
+const Menu = ({ title, recipes }) => (
+    <article>
+      <header>
+        <h1>{title}</h1>
+      </header>
+      <div className="recipes">
+        {recipes.map(
+            (recipe, i) => <Recipe key={i} {...recipe} />
+        )}
+      </div>
+    </article>
+)
