@@ -114,3 +114,12 @@ const Menu = ({ title, recipes }) => (
       </div>
     </article>
 )
+
+/**
+ * 
+ */
+// A call to ReactDOM to render our Menu into the current DOM
+ReactDOM.render(
+    <Menu recipes={data} title="Delicious Recipes" />,
+    document.getElementById("react-container")
+)
