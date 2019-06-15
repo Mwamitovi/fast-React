@@ -1,7 +1,7 @@
 {
-  "name": "recipe-app",
+  "name": "fast-react",
   "version": "1.0.0",
-  "description": "Learning React Chapter 4 sample for modular recipes with webpack",
+  "description": "Functional Web development with React and Redux",
   "main": "index.js",
   "scripts": {
     "build": "webpack --progress",
@@ -10,21 +10,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MoonHighway/learning-react.git"
+    "url": "https://github.com/MwamiTovi/fast-React.git"
   },
   "keywords": [
     "Learning",
+    "ES6",
     "React",
+    "redux",
+    "babel",
     "webpack",
     "intro",
     "jsx"
   ],
-  "author": "Alex Banks <alex@moonhighway.com> (http://www.moonhighway.com)",
+  "author": "Matovu Martin <matovu.synergy@gmail.com> (https://github.com/MwamiTovi)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MoonHighway/learning-react/issues"
+    "url": "https://github.com/MwamiTovi/fast-React/issues"
   },
-  "homepage": "https://github.com/MoonHighway/learning-react#readme",
+  "homepage": "https://github.com/MwamiTovi/fast-React#readme",
   "dependencies": {
     "react": "16.0.0",
     "react-dom": "16.0.0"
