@@ -10,3 +10,5 @@ const Instructions = ({ title, steps }) => (
 )
 
 Instructions.displayName = 'Instructions'
+
+export default Instructions
