@@ -1,0 +1,12 @@
+// Instructions component,
+// defines the steps property and how to render
+const Instructions = ({ title, steps }) => (
+    <section className="instructions">
+        <h2>{title}</h2>
+        {steps.map((s, i) =>
+            <p key={i}>{s}</p>
+        )}
+    </section>
+)
+
+Instructions.displayName = 'Instructions'
