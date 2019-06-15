@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --progress",
     "prestart": "npm run build",
-    "start": "opener dist/index.html"
+    "start": "opener recipe-app/dist/index.html"
   },
   "repository": {
     "type": "git",
