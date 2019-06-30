@@ -122,6 +122,7 @@ const ColorList = ({ colors=[] }) => (
  * Color component
  * Renders the color's title and HEX values.
  * Then passes the color's rating down to the StarRating component as a property.
+ * The number of starsSelected in the star rating comes from each color’s rating.
  */
 // define the Color function
 const Color = ({ title, color, rating=0 }) => (
@@ -133,3 +134,7 @@ const Color = ({ title, color, rating=0 }) => (
         </div>
     </section>
 )
+
+
+// Passing Data Back Up the Component Tree
+
