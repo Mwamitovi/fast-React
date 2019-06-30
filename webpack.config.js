@@ -1,5 +1,5 @@
-var webpack = require("webpack")
-var path = require("path")
+var webpack = require("webpack");
+var path = require("path");
 
 process.noDeprecation = true
 
@@ -42,8 +42,8 @@ module.exports = {
 
       new webpack.optimize.UglifyJsPlugin({
           sourceMap: true,
-          warnings: true,
-          mangle: false
+          warnings: false,
+          mangle: true
       })
   ]
 }
