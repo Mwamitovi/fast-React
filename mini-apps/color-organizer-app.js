@@ -66,3 +66,34 @@ const StarRating = ({ starSelected=0, totalStars=5, onRate=f=>f }) => (
         <p>{starSelected} of {totalStars} stars</p>
     </div>
 )
+
+
+// Introducing State, within the app
+
+
+/**
+ * App component 
+ * We initiate state within this component.
+ * In our color organizer, 
+ * state consists of an array of colors that is declared in the App component. 
+ * Those colors are passed down to the ColorList component as a property.
+ */
+class App extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            colors: []
+        }
+    }
+
+    render() {
+        const { colors } = this.state
+        return (
+            <div className="app">
+                <AddColorForm />
+                <ColorList colors={colors} />
+            </div>
+        )
+    }
+}
