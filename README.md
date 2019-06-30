@@ -4,21 +4,26 @@ Fast React
 ## SYNOPSIS
 
 The world is reacting, and this is a series of "mini" React projects.
-We look at the concepts of functional programming inorder to structure React Applications better. 
-And then dive into Pure React (What's heppening behind the scenes), 
-JSX (A JavaScript extension, similar to HTML, for defining react elements),
-Data handling and Component lifecycle (the react advantage),
-Redux (based on flux, to manage application state, while building UI),
-Unit testing (using ESLint, Jest and Enzyme to verify our "app" functions),
-React router (managing browser history in Single-Pages-Apps),
-React and the server (isomorphic concept, node-express and more).
+We look at the concepts of functional programming inorder to structure React Applications better.
+
+What's happening behind the scenes? 
+We look at Pure React. 
+And quickly switch focus to a JavaScript extension (JSX), similar to HTML, for defining react elements.
+
+But really, what is the React advantage? 
+We dig into Data handling and Component lifecycle to answer this question.
+Then we get on to use Redux (based on flux) to manage application state while building the UI.
+
+We also Unit test using tools like ESLint, Jest and Enzyme to verify our "app" functions.
+Plus how do we manage browser history in Single-Pages-Apps with React Router?
+And finally, we get into React and the server (isomorphic concept, node-express and more).
 
 
 ## IMPORTANT
 
 ** You need, but are not limited to,
    - yarn (package manager created at Facebook)(npm can also work)*
-   - ES6(es2105)
+   - ES6(ECMAScript2015)
    - React developer tools (for Chrome/Firefox)
    - React & React-dom (together, the React library)
    - redux, react-redux, babel, webpack and more (look at package.json)
@@ -36,9 +41,6 @@ React and the server (isomorphic concept, node-express and more).
 
 
 ### Further help
-
-    - For more on Angular CLI use `ng help` or see the [Angular CLI README]
-      (https://github.com/MoonHighway/learning-react)
 
     - This project reference: Learning React (Functional Web development with React & Redux)
       available at http://bit.ly/learning-react-2e
