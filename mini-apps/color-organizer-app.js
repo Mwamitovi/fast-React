@@ -97,3 +97,21 @@ class App extends Component {
         )
     }
 }
+
+/**
+ * ColorList component
+ * Renders the color array, if there are any colors added.
+ * Utilizes the Color component (below) to achieve this.
+ */
+
+const ColorList = ({ colors=[] }) => (
+    <div className="color-list">
+        {(colors.length === 0) ?
+            <p>No Colors listed yet. (Add a Color)</p> :
+            colors.map(
+                color =>
+                    <Color key={color.id} {...color} />
+            )
+        }
+    </div>
+)
