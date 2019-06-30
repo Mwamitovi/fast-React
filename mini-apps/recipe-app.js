@@ -1,6 +1,7 @@
 
 /**
- * Recipe application
+ * Recipe application (summary)
+ * See branch: feature/recipe-app (detailed)
  * 
  * Using ES6 and JSX to develop an app,
  * which simply displays ingredients and some cooking instructions.
