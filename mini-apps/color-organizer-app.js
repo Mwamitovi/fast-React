@@ -57,13 +57,13 @@
  * that data will be passed ouf of this component via a callback function.
  */
 // For displaying the "stars"
-const StarRating = ({ starSelected=0, totalStars=5, onRate=f=>f }) => (
+const StarRating = ({ starsSelected=0, totalStars=5, onRate=f=>f }) => (
     <div className="star-rating">
         {[...Array(totalStars)].map(
             (n, i) => 
-                <Star key={i} selected={i<starSelected} onClick={()=>onRate(i+1)} />
+                <Star key={i} selected={i<starsSelected} onClick={()=>onRate(i+1)} />
         )}
-        <p>{starSelected} of {totalStars} stars</p>
+        <p>{starsSelected} of {totalStars} stars</p>
     </div>
 )
 
@@ -78,6 +78,7 @@ const StarRating = ({ starSelected=0, totalStars=5, onRate=f=>f }) => (
  * state consists of an array of colors that is declared in the App component. 
  * Those colors are passed down to the ColorList component as a property.
  */
+// define App class
 class App extends Component {
 
     constructor(props) {
@@ -103,7 +104,7 @@ class App extends Component {
  * Renders the color array, if there are any colors added.
  * Utilizes the Color component (below) to achieve this.
  */
-
+// define the ColorList function
 const ColorList = ({ colors=[] }) => (
     <div className="color-list">
         {(colors.length === 0) ?
@@ -114,4 +115,21 @@ const ColorList = ({ colors=[] }) => (
             )
         }
     </div>
+)
+
+
+/**
+ * Color component
+ * Renders the color's title and HEX values.
+ * Then passes the color's rating down to the StarRating component as a property.
+ */
+// define the Color function
+const Color = ({ title, color, rating=0 }) => (
+    <section className="color">
+        <h1>{title}</h1>
+        <div className="color" style={{ backgroundColor: color}}></div>
+        <div>
+            <StarRating starsSelected={rating} />
+        </div>
+    </section>
 )
