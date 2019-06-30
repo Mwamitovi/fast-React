@@ -56,3 +56,13 @@
  * Since this is a stateless functional component, when a user changes the rating, 
  * that data will be passed ouf of this component via a callback function.
  */
+// For displaying the "stars"
+const StarRating = ({ starSelected=0, totalStars=5, onRate=f=>f }) => (
+    <div className="star-rating">
+        {[...Array(totalStars)].map(
+            (n, i) => 
+                <Star key={i} selected={i<starSelected} onClick={()=>onRate(i+1)} />
+        )}
+        <p>{starSelected} of {totalStars} stars</p>
+    </div>
+)
