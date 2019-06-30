@@ -10,7 +10,15 @@
 
 /**
  * Representational state of our app * 
- * The entire state of the color organizer can be represented with a single array
+ * The entire state of the color organizer can be represented with a single array.
+ * This array describes three colors: ocean at dusk, lawn, and bright red. 
+ * It gives us the colors’ hex values and the current rating for each color. 
+ * It also provides a way to uniquely identify each color.
+ * 
+ * This state data will drive our application. It's our "single source of truth".
+ * It will be used to construct the UI every time this object changes. 
+ * When users add or remove colors, they will be added to or removed from this array.
+ * When users rate colors, their ratings will change in the array.
  */
 // The colors, an array of objects
 {
@@ -35,3 +43,16 @@
         }
     ]
 }
+
+
+// Passing Properties down the Component Tree
+
+
+/**
+ * StarRating component
+ * This is a presentational component - only concerned with how things look in the app.
+ * All data is sent to this (presentational) component via properties, and
+ * passed out of the component a via callback function.
+ * Since this is a stateless functional component, when a user changes the rating, 
+ * that data will be passed ouf of this component via a callback function.
+ */
