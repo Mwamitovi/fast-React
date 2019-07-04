@@ -45,6 +45,28 @@
 }
 
 
+/**
+ * Star Component
+ * A stateless functional component that represents each star.
+ * Stateless functional components are meant to be the children of more complex, stateful components.
+ * This needs to be a clickable Star component that has a selected property.
+ * When a user clicks on any star <div, the onClick() property will be invoked. 
+ * This will tell the parent component, the StarRating, that a Star has been clicked.
+ * If the star is selected, it will additionally add the class 'selected'.
+ */
+
+// Define the Star
+const Star = ({ selected=false, onClick=f=>f }) => (
+    <div className={(selected) ? "star selected" : "star"} onClick={onClick}>
+    </div>
+)
+
+Star.propTypes = {
+    selected: PropTypes.bool,
+    onClick: PropTypes.func
+}
+
+
 // Passing Properties down the Component Tree
 
 
