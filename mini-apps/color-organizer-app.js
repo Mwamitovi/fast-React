@@ -45,57 +45,12 @@
 }
 
 
-/**
- * Star Component
- * A stateless functional component that represents each star.
- * Stateless functional components are meant to be the children of more complex, stateful components.
- * This needs to be a clickable Star component that has a selected property.
- * When a user clicks on any star <div, the onClick() property will be invoked. 
- * This will tell the parent component, the StarRating, that a Star has been clicked.
- * If the star is selected, it will additionally add the class 'selected'.
- */
-
-// Define the Star
-const Star = ({ selected=false, onClick=f=>f }) => (
-    <div className={(selected) ? "star selected" : "star"} onClick={onClick}>
-    </div>
-)
-
-Star.propTypes = {
-    selected: PropTypes.bool,
-    onClick: PropTypes.func
-}
-
-
 // Passing Properties down the Component Tree
 
 
 /**
- * StarRating component
- * This is a presentational component - only concerned with how things look in the app.
- * All data is sent to this (presentational) component via properties, and
- * passed out of the component a via callback function.
- * Since this is a stateless functional component, when a user changes the rating, 
- * that data will be passed ouf of this component via a callback function.
- */
-// For displaying the "stars"
-const StarRating = ({ starsSelected=0, totalStars=5, onRate=f=>f }) => (
-    <div className="star-rating">
-        {[...Array(totalStars)].map(
-            (n, i) => 
-                <Star key={i} selected={i<starsSelected} onClick={()=>onRate(i+1)} />
-        )}
-        <p>{starsSelected} of {totalStars} stars</p>
-    </div>
-)
-
-
-// Introducing State, within the app
-
-
-/**
  * App component 
- * We initiate state within this component.
+ * We introduce State within the app, as initiated within this component.
  * In our color organizer, 
  * state consists of an array of colors that is declared in the App component. 
  * Those colors are passed down to the ColorList component as a property.
@@ -150,12 +105,54 @@ const ColorList = ({ colors=[] }) => (
 const Color = ({ title, color, rating=0 }) => (
     <section className="color">
         <h1>{title}</h1>
-        <div className="color" style={{ backgroundColor: color}}></div>
+        <div className="color" style={{ backgroundColor: color }}></div>
         <div>
             <StarRating starsSelected={rating} />
         </div>
     </section>
 )
+
+
+/**
+ * StarRating component
+ * This is a presentational component - only concerned with how things look in the app.
+ * All data is sent to this (presentational) component via properties, and
+ * passed out of the component a via callback function.
+ * Since this is a stateless functional component, when a user changes the rating, 
+ * that data will be passed ouf of this component via a callback function.
+ */
+// For displaying the "stars"
+const StarRating = ({ starsSelected=0, totalStars=5, onRate=f=>f }) => (
+    <div className="star-rating">
+        {[...Array(totalStars)].map(
+            (n, i) => 
+                <Star key={i} selected={i<starsSelected} onClick={()=>onRate(i+1)} />
+        )}
+        <p>{starsSelected} of {totalStars} stars</p>
+    </div>
+)
+
+
+/**
+ * Star Component
+ * A stateless functional component that represents each star.
+ * Stateless functional components are meant to be the children of more complex, stateful components.
+ * This needs to be a clickable Star component that has a selected property.
+ * When a user clicks on any star <div, the onClick() property will be invoked. 
+ * This will tell the parent component, the StarRating, that a Star has been clicked.
+ * If the star is selected, it will additionally add the class 'selected'.
+ */
+
+// Define the Star
+const Star = ({ selected=false, onClick=f=>f }) => (
+    <div className={(selected) ? "star selected" : "star"} onClick={onClick}>
+    </div>
+)
+
+Star.propTypes = {
+    selected: PropTypes.bool,
+    onClick: PropTypes.func
+}
 
 
 // Passing Data Back Up the Component Tree
