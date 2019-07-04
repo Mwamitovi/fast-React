@@ -1,4 +1,5 @@
-
+import { component } from 'react'
+import { v4 } from 'uuid'
 /**
  * Color Organizer App (summary)
  * See branch: feature/color-organizer-app (detailed)
@@ -45,7 +46,14 @@
 }
 
 
-// Passing Properties down the Component Tree
+/** 
+ *Passing Properties down the Component Tree
+ * 
+ * All of the state data for every color is passed down the tree 
+ * to child components as properties. 
+ * When there is a change to the data in the root component, 
+ * React will change the UI as efficiently as possible to reflect the new state.
+ */
 
 
 /**
@@ -55,26 +63,26 @@
  * state consists of an array of colors that is declared in the App component. 
  * Those colors are passed down to the ColorList component as a property.
  */
-// define App class
-class App extends Component {
+// define App class - refactored to receive data back
+// class App extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            colors: []
-        }
-    }
+//     constructor(props) {
+//         super(props)
+//         this.state = {
+//             colors: []
+//         }
+//     }
 
-    render() {
-        const { colors } = this.state
-        return (
-            <div className="app">
-                <AddColorForm />
-                <ColorList colors={colors} />
-            </div>
-        )
-    }
-}
+//     render() {
+//         const { colors } = this.state
+//         return (
+//             <div className="app">
+//                 <AddColorForm />
+//                 <ColorList colors={colors} />
+//             </div>
+//         )
+//     }
+// }
 
 /**
  * ColorList component
@@ -155,5 +163,48 @@ Star.propTypes = {
 }
 
 
-// Passing Data Back Up the Component Tree
+/**
+ * Passing Data Back Up the Component Tree
+ * 
+ * State in the color organizer can only be updated by 
+ * calling setState() from the App component. 
+ * If users initiate any changes from the UI, 
+ * their input will need to be passed back up the component tree to 
+ * the App component in order to update the state
+ */
 
+
+ /**
+  * AddColorForm component
+  * All new colors will be added to the color organizer using this component. 
+  * The component has an optional callback function property called onNewColor(). 
+  * When the user adds a new color and submits the form, 
+  * the onNewColor() callback function is invoked with the 
+  * new title and color hex value obtained from the user.
+  * 
+  * In this stateless functional component, 
+  * refs are set with a callback function instead of a string. 
+  * The callback function passes the element’s instance as an argument. 
+  * This instance can be captured and saved into a local variable like _title or _color. 
+  * Once we’ve saved the refs to local variables, they are easily accessed when the form is submitted.
+  */
+// Define AddColorForm
+const AddColorForm = ({onNewColor=f=>f}) => {
+    let _title, _color
+    const submit = e => {
+        e.preventDefault()
+        onNewColor(_title.value, _color.value)
+        _title.value = ''
+        _color.value = '#000000'
+        _title.focus()
+    }
+    return (
+        <form onSubmit={submit}>
+            <input ref={input => _title = input} 
+                type="text" placeholder="color title..." required/>
+            <input ref={input => _color = input} 
+                type="color" required/>
+            <button>ADD</button>
+        </form>
+    )
+}
