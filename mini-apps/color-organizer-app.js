@@ -1,4 +1,4 @@
-import { component } from 'react'
+import { Component } from 'react'
 import { v4 } from 'uuid'
 /**
  * Color Organizer App (summary)
@@ -6,7 +6,6 @@ import { v4 } from 'uuid'
  * 
  * How to manage state within an app,
  * that allows users to add, name, rate, and remove colors in their customized lists.
- * .
  */
 
 /**
@@ -63,7 +62,7 @@ import { v4 } from 'uuid'
  * state consists of an array of colors that is declared in the App component. 
  * Those colors are passed down to the ColorList component as a property.
  */
-// define App class - refactored to receive data back
+// define App class
 // class App extends Component {
 
 //     constructor(props) {
@@ -90,7 +89,7 @@ import { v4 } from 'uuid'
  * Utilizes the Color component (below) to achieve this.
  */
 // define the ColorList function
-const ColorList = ({ colors=[] }) => (
+const ColorList = ({ colors=[] }) => {
     <div className="color-list">
         {(colors.length === 0) ?
             <p>No Colors listed yet. (Add a Color)</p> :
@@ -100,7 +99,7 @@ const ColorList = ({ colors=[] }) => (
             )
         }
     </div>
-)
+}
 
 
 /**
@@ -110,15 +109,15 @@ const ColorList = ({ colors=[] }) => (
  * The number of starsSelected in the star rating comes from each color’s rating.
  */
 // define the Color function
-const Color = ({ title, color, rating=0 }) => (
-    <section className="color">
-        <h1>{title}</h1>
-        <div className="color" style={{ backgroundColor: color }}></div>
-        <div>
-            <StarRating starsSelected={rating} />
-        </div>
-    </section>
-)
+// const Color = ({ title, color, rating=0 }) => {
+//     <section className="color">
+//         <h1>{title}</h1>
+//         <div className="color" style={{ backgroundColor: color }}></div>
+//         <div>
+//             <StarRating starsSelected={rating} />
+//         </div>
+//     </section>
+// }
 
 
 /**
@@ -130,7 +129,7 @@ const Color = ({ title, color, rating=0 }) => (
  * that data will be passed ouf of this component via a callback function.
  */
 // For displaying the "stars"
-const StarRating = ({ starsSelected=0, totalStars=5, onRate=f=>f }) => (
+const StarRating = ({ starsSelected=0, totalStars=5, onRate=f=>f }) => {
     <div className="star-rating">
         {[...Array(totalStars)].map(
             (n, i) => 
@@ -138,7 +137,7 @@ const StarRating = ({ starsSelected=0, totalStars=5, onRate=f=>f }) => (
         )}
         <p>{starsSelected} of {totalStars} stars</p>
     </div>
-)
+}
 
 
 /**
@@ -152,15 +151,18 @@ const StarRating = ({ starsSelected=0, totalStars=5, onRate=f=>f }) => (
  */
 
 // Define the Star
-const Star = ({ selected=false, onClick=f=>f }) => (
+const Star = ({ selected=false, onClick=f=>f }) => {
     <div className={(selected) ? "star selected" : "star"} onClick={onClick}>
     </div>
-)
+}
 
 Star.propTypes = {
     selected: PropTypes.bool,
     onClick: PropTypes.func
 }
+
+
+// REFACTORING...
 
 
 /**
@@ -208,3 +210,61 @@ const AddColorForm = ({onNewColor=f=>f}) => {
         </form>
     )
 }
+
+
+/**
+ * App Component - refactored to receive data back
+ * All new colors can be added from the addColor() method in the App component. 
+ * This function is bound to the component in the constructor, 
+ * which means that it has access to this.state and this.setState.
+ * 
+ * New colors are added by concatenating the current colors array with a new color object. 
+ * The ID for the new color object is set using uuid’s v4 function,
+ * which creates a unique identifier for each color. 
+ * The title and color are passed to the addColor method from the AddColorForm component. 
+ * Finally, the initial value for each color’s rating will be 0.
+ * 
+ * When the user adds a color with the AddColorForm component, 
+ * the addColor method updates the state with a new list of colors. 
+ * Once the state has been updated, 
+ * the App component rerenders the component tree with the new list of colors. 
+ * The render method is invoked after every setState call. 
+ * The new data is passed down the tree as properties and is used to construct the UI.
+ * 
+ */
+// Refactor the App Component
+export class App extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            colors: []
+        }
+        this.addColor = this.addColor.bind(this)
+    }
+
+    addColor(title, color) {
+        const colors = [
+            ...this.state.colors,
+            {
+                id: v4(),
+                title,
+                color,
+                rating = 0
+            }
+        ]
+        this.setState({colors})
+    }
+
+    render() {
+        const { addColor } = this
+        const { colors } = this.state
+        return (
+            <div className="app">
+                <AddColorForm onNewColor={addColor} />
+                <ColorList colors={colors} />            
+            </div>
+        )
+    }
+}
+
