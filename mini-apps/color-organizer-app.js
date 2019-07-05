@@ -89,17 +89,17 @@ import { v4 } from 'uuid'
  * Utilizes the Color component (below) to achieve this.
  */
 // define the ColorList function
-const ColorList = ({ colors=[] }) => {
-    <div className="color-list">
-        {(colors.length === 0) ?
-            <p>No Colors listed yet. (Add a Color)</p> :
-            colors.map(
-                color =>
-                    <Color key={color.id} {...color} />
-            )
-        }
-    </div>
-}
+// const ColorList = ({ colors=[] }) => {
+//     <div className="color-list">
+//         {(colors.length === 0) ?
+//             <p>No Colors listed yet. (Add a Color)</p> :
+//             colors.map(
+//                 color =>
+//                     <Color key={color.id} {...color} />
+//             )
+//         }
+//     </div>
+// }
 
 
 /**
@@ -278,7 +278,7 @@ export class App extends Component {
  * Also, if the user changes the color’s rating with the StarRating component, 
  * we want to change the rating of that color.
  */
-
+// Refactor the Color component
 const Color = ({ title, color, rating=0, onRemove=f=>f, onRate=f=>f }) => {
     <section className="color">
         <h1>{title}</h1>
@@ -288,4 +288,30 @@ const Color = ({ title, color, rating=0, onRemove=f=>f, onRate=f=>f }) => {
             <StarRating starsSelected={rating} onRate={onRate} />
         </div>
     </section>
+}
+
+/**
+ * ColorList component - refactored to include more methods
+ * The information that will change in this app is stored in the list of colors. 
+ * Thus, onRemove() and onRate() callback properties will have to be added 
+ * to each color to pass those events back up the tree. 
+ * The Color component will also have onRate and onRemove callback function properties. 
+ * When colors are rated or removed, the ColorList component will need to notify its parent, 
+ * the App component, that the color should be rated or removed.
+ */
+// Refactor the ColorList component
+const ColorList = ({ colors=[], onRate=f=>f, onRemove=f=>f}) => {
+    <div className="color-list">
+        {(colors.length === 0) ?
+            <p>No Colors listed. (Add a color)</p> :
+            colors.map(
+                color => <Color key={color.id}
+                            {...color}
+                            onRate={(rating) => onRate(color.id, rating)}
+                            oRemove={() => onRemove(color.id)}
+                          />
+
+            )
+        }
+    </div>
 }
