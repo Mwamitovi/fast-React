@@ -233,40 +233,40 @@ const AddColorForm = ({onNewColor=f=>f}) => {
  * 
  */
 // Refactor the App Component
-export class App extends Component {
+// export class App extends Component {
 
-    constructor(props) {
-        super(props)
-        this.state = {
-            colors: []
-        }
-        this.addColor = this.addColor.bind(this)
-    }
+//     constructor(props) {
+//         super(props)
+//         this.state = {
+//             colors: []
+//         }
+//         this.addColor = this.addColor.bind(this)
+//     }
 
-    addColor(title, color) {
-        const colors = [
-            ...this.state.colors,
-            {
-                id: v4(),
-                title,
-                color,
-                rating = 0
-            }
-        ]
-        this.setState({colors})
-    }
+//     addColor(title, color) {
+//         const colors = [
+//             ...this.state.colors,
+//             {
+//                 id: v4(),
+//                 title,
+//                 color,
+//                 rating = 0
+//             }
+//         ]
+//         this.setState({colors})
+//     }
 
-    render() {
-        const { addColor } = this
-        const { colors } = this.state
-        return (
-            <div className="app">
-                <AddColorForm onNewColor={addColor} />
-                <ColorList colors={colors} />            
-            </div>
-        )
-    }
-}
+//     render() {
+//         const { addColor } = this
+//         const { colors } = this.state
+//         return (
+//             <div className="app">
+//                 <AddColorForm onNewColor={addColor} />
+//                 <ColorList colors={colors} />            
+//             </div>
+//         )
+//     }
+// }
 
 
 /**
@@ -290,6 +290,7 @@ const Color = ({ title, color, rating=0, onRemove=f=>f, onRate=f=>f }) => {
     </section>
 }
 
+
 /**
  * ColorList component - refactored to include more methods
  * The information that will change in this app is stored in the list of colors. 
@@ -298,6 +299,12 @@ const Color = ({ title, color, rating=0, onRemove=f=>f, onRate=f=>f }) => {
  * The Color component will also have onRate and onRemove callback function properties. 
  * When colors are rated or removed, the ColorList component will need to notify its parent, 
  * the App component, that the color should be rated or removed.
+ * 
+ * ColorList will invoke onRate() if any colors are rated and onRemove() if any colors are removed. 
+ * This component manages the collection of colors by mapping them to individual Color components. 
+ * When individual colors are rated or removed the ColorList identifies which color 
+ * was rated or removed and passes that info to its parent via callback function properties.
+ * ColorList’s parent is App.
  */
 // Refactor the ColorList component
 const ColorList = ({ colors=[], onRate=f=>f, onRemove=f=>f}) => {
@@ -314,4 +321,78 @@ const ColorList = ({ colors=[], onRate=f=>f, onRemove=f=>f}) => {
             )
         }
     </div>
+}
+
+
+/**
+ * App component
+ * We add and bound, rateColor and removeColor methods, to the component instance in the constructor.
+ * Any time a color needs to be rated or removed, these methods will update the state. 
+ * They are added to the ColorList component as callback function properties.
+ * Both rateColor and removeColor expect the ID of the color to rate or remove. 
+ * The ID is captured in the ColorList component and passed as an argument to rateColor or removeColor. 
+ * The rateColor method finds the color to rate and changes its rating in the state. 
+ * The removeColor method uses Array.filter to create a new state array without the removed color.
+ * 
+ * Once setState is called, the UI is rerendered with the new state data. 
+ * All data that changes in this app is managed from a single component, App. 
+ * This approach makes it much easier to understand what data the application uses 
+ * to create state and how that data will change.
+ */
+// Completed App component
+export class App extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            colors: []
+        }
+        this.addColor = this.addColor.bind(this)
+        this.rateColor = this.rateColor.bind(this)
+        this.removeColor = this.removeColor.bind(this)
+    }
+
+    addColor(title, color) {
+        const colors = [
+            ...this.state.colors,
+            {
+                id: v4(),
+                title,
+                color, 
+                rating=0
+            }
+        ]
+        this.setState({ colors })
+    }
+
+    rateColor(id, rating) {
+        const colors = this.state.colors.map( 
+            color =>
+                (color.id !== id) ?
+                color:
+                {
+                    ...color,
+                    rating
+                }
+        )
+        this.setState({ colors })
+    }
+
+    removeColor(id) {
+        const colrs = this.state.colors.filter(
+            color => color.id !== id
+        )
+        this.setState({ colors })
+    }
+
+    render() {
+        const { addColor, rateColor, removeColor } = this
+        const { colors } = this.state
+        return (
+            <div className="app">
+                <AddColorForn onNewColor={addColor} />
+                <ColorList colors={colors} onRate={rateColor} onRemove={removeColor} />
+            </div>
+        )
+    }
 }
