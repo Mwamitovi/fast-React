@@ -3,7 +3,7 @@ import Star from './Star'
 
 
 // we map over an array of (5) number to create 5-stars
-const StarRating = ({ starsSelected=0, totalStars=5, onRate=f=>f }) => {
+const StarRating = ({ starsSelected=0, totalStars=5, onRate=f=>f }) => (
     <div className="star-rating">
         {[...Array(totalStars)].map((n, i) =>
             <Star key={i} 
@@ -12,7 +12,7 @@ const StarRating = ({ starsSelected=0, totalStars=5, onRate=f=>f }) => {
         )}
         <p>{starsSelected} of {totalStars} stars</p>
     </div>
-}
+)
 
 StarRating.propTypes = {
     starsSelected: PropTypes.number,
