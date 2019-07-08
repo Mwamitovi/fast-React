@@ -54,7 +54,7 @@ export default class App extends Component {
         const { addColor, rateColor, removeColor } = this
         const { colors } = this.state
         return (
-            <div classNmae="app">
+            <div className="app">
                 <AddColorForm onNewColor={addColor} />
                 <ColorList colors={colors} 
                            onRate={rateColor}
