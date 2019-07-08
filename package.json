@@ -1,7 +1,7 @@
 {
   "name": "color-organizer-app",
   "version": "1.0.0",
-  "description": "Learning React Chapter 4 sample for modular recipes with webpack",
+  "description": "A React application, with state, and defined property types",
   "main": "index.js",
   "scripts": {
     "build": "webpack --progress",
