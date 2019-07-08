@@ -28,7 +28,7 @@ more focused stateless functional components and compose them together.
 ### Configure
 
    - To follow-closely, look for summarized verion of the app within
-     folder `mini-apps/recipe-app.js`
+     folder `recipe-app/recipe-app.js`
 
    - Study the "package.json" and "webpack.config.js", 
      that is where the main file conventions/standards are located.
