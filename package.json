@@ -1,7 +1,7 @@
 {
-  "name": "fast-react",
+  "name": "recipe-app",
   "version": "1.0.0",
-  "description": "Functional Web development with React and Redux",
+  "description": "A Stateless application based on ES6, React and JSX",
   "main": "index.js",
   "scripts": {
     "build": "webpack --progress",
@@ -10,7 +10,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MwamiTovi/fast-React.git"
+    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/recipe-app"
   },
   "keywords": [
     "Learning",
@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/MwamiTovi/fast-React/issues"
   },
-  "homepage": "https://github.com/MwamiTovi/fast-React#readme",
+  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/recipe-app#readme",
   "dependencies": {
     "react": "16.0.0",
     "react-dom": "16.0.0"
