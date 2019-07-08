@@ -1,63 +1,48 @@
-Fast React
+Recipe App
 ==========
 
 ## SYNOPSIS
 
-The world is reacting, and this is a series of "mini" React projects.
-We look at the concepts of functional programming inorder to structure React Applications better.
-
-What's happening behind the scenes? 
-We look at Pure React. 
-And quickly switch focus to a JavaScript extension (JSX), similar to HTML, for defining react elements.
-
-But really, what is the React advantage? 
-We dig into Data handling and Component lifecycle to answer this question.
-Then we get on to use Redux (based on flux) to manage application state while building the UI.
-
-We also Unit test using tools like ESLint, Jest and Enzyme to verify our "app" functions.
-Plus how do we manage browser history in Single-Pages-Apps with React Router?
-And finally, we get into React and the server (isomorphic concept, node-express and more).
+We draw into the concept of components inorder to display "recipes".
+Using a functional approach, we create two main components - Menu and Recipe.
+We break the Recipe component further into smaller, 
+more focused stateless functional components and compose them together.
 
 
 ## IMPORTANT
 
-** You need, but are not limited to,
-   - yarn (package manager created at Facebook)(npm can also work)*
-   - ES6(ECMAScript2015)
-   - React developer tools (for Chrome/Firefox)
-   - React & React-dom (together, the React library)
-   - redux, react-redux, babel, webpack and more (look at package.json)
+** Notice the use of the following,
+   - ES6: using latest features of JavaScript
+   - JSX: write syntax similar to HTML
+   - babel: transpile/convert source code into browser-supported code
+   - webpack: bundles all modules into a single file
 
 
 ## GET - STARTED
 
 ### Assumptions
    - Configure your Version Control (Git-flow)
-   - Fork the repository
+   - Fork the repository (https://github.com/Mwamitovi/fast-React)
+   - switch to branch, "recipe-app"
 
 ### Configure
 
-   - Run `yarn install` within the project root folder. (same location as package.json)
+   - Study the "package.json" and "webpack.config.js", 
+     that is where the main file conventions/standards are located.
+
+   - Run `npm run-script start` to launch the app.
+     Behind the scenes, this script initiates a sequence of commands.
+      - prestart: `npm run build` that initiates webpack processes.
+      - build: `webpack --progress` lanches webpack to build the app.
+      - start: `opener recipe-app/dist/index.html` launches the app in browser.
+
+   - And there you have the simple "recipe-app" which can be scaled easily.
 
 
 ### Further help
 
     - This project reference: Learning React (Functional Web development with React & Redux)
       available at http://bit.ly/learning-react-2e
-
-    - see [React Documentation] at (https://facebook.github.io/react/index.html)
-
-    - see [React Source] at (https://github.com/facebook/react)
-
-    - see [Webpack Documentation] at (https://webpack.js.org/)
-
-    - see [Flux Documentation] at (https://facebook.github.io/flux/docs/overview.html)
-
-    - see [Redux Documentation] at (http://redux.js.org/index.html)
-
-    - see [Jest Documentation] at (https://facebook.github.io/jest/)
-
-    - see [React Router Documentation] at (https://reacttraining.com/react-router/)
 
 
 ### Contribution guidelines
