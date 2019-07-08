@@ -23,9 +23,12 @@ more focused stateless functional components and compose them together.
 ### Assumptions
    - Configure your Version Control (Git-flow)
    - Fork the repository (https://github.com/Mwamitovi/fast-React)
-   - switch to branch, "recipe-app"
+   - You are within branch, "feature/recipe-app"
 
 ### Configure
+
+   - To follow-closely, look for summarized verion of the app within
+     folder `mini-apps/recipe-app.js`
 
    - Study the "package.json" and "webpack.config.js", 
      that is where the main file conventions/standards are located.
