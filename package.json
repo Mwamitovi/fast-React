@@ -1,33 +1,38 @@
 {
-  "name": "recipe-app",
+  "name": "color-organizer-app",
   "version": "1.0.0",
   "description": "Learning React Chapter 4 sample for modular recipes with webpack",
   "main": "index.js",
   "scripts": {
     "build": "webpack --progress",
     "prestart": "npm run build",
-    "start": "opener dist/index.html"
+    "start": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-app/dist"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MoonHighway/learning-react.git"
+    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/color-organizer-app"
   },
   "keywords": [
-    "Learning",
     "React",
-    "webpack",
-    "intro",
-    "jsx"
+    "state",
+    "setState",
+    "explicitly",
+    "passing",
+    "props"
   ],
-  "author": "Alex Banks <alex@moonhighway.com> (http://www.moonhighway.com)",
+  "author": "Matovu Martin <matovu.synergy@gmail.com> (https://github.com/MwamiTovi)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/MoonHighway/learning-react/issues"
+    "url": "https://github.com/MwamiTovi/fast-React/issues"
   },
-  "homepage": "https://github.com/MoonHighway/learning-react#readme",
+  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/color-organizer-app#readme",
   "dependencies": {
+    "ajv": "^5.0.0",
+    "httpster": "1.0.3",
+    "prop-types": "15.6.0",
     "react": "16.0.0",
-    "react-dom": "16.0.0"
+    "react-dom": "16.0.0",
+    "uuid": "3.3.2"
   },
   "devDependencies": {
     "babel-core": "6.26.0",
@@ -36,10 +41,11 @@
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
     "css-loader": "0.28.7",
+    "node-sass": "^4.9.4",
     "opener": "1.4.3",
     "postcss-loader": "2.0.6",
+    "sass-loader": "6.0.6",
     "style-loader": "0.18.2",
-    "uuid": "^3.3.2",
     "webpack": "3.6.0"
   }
 }
