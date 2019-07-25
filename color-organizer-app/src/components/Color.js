@@ -10,6 +10,10 @@ class Color extends Component {
         this.style = { backgroundColor: '#CCC' }
     }
 
+    componentWillUpdate() {
+        this.style = null
+    }
+
     render() {
         const { title, color, rating, onRate } = this.props
         return (
