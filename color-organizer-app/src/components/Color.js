@@ -11,18 +11,22 @@ class Color extends Component {
     }
 
     shouldComponentUpdate(nextProps) {
-        const { rating } = this.props
-        return rating !== nextProps.rating
+        return this.props.rating !== nextProps.rating
     }
 
-    componentWillUpdate() {
+    componentWillUpdate(nextProps) {
+        const { title, rating } = this.props
         this.style = null
+        this.refs.title.style.backgroundColor = "red"
+        this.refs.title.style.color = "white"
+        alert(`${title}: rating ${rating} -> ${nextProps.rating}`)
     }
 
     componentDidUpdate(prevProps) {
         const { title, rating } = this.props
         const status = (rating > prevProps.rating) ? 'better' : 'worse'
-        console.log(`${title} is getting ${status}`)
+        this.refs.title.style.backgroundColor = ''
+        this.refs.title.style.color = 'black'
     }
 
     render() {
