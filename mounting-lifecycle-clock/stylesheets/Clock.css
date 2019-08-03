@@ -1,0 +1,48 @@
+body, html {
+    height: 100%;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: "Keania One", verdana;
+        background-color: black;
+        color: #008209;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+div.clock {
+    width: 339px;
+    border: solid 1px;
+    height: 80px;
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-end;
+    }
+
+    div.clock span {
+        font-size: 3em;
+    }
+
+    div.clock button {
+        position: absolute;
+        top: .2em;
+        right: .2em;
+        padding: .4em;
+        font-size: .8em;
+        line-height: .8em;
+        font-weight: bold;
+        color: #008209;
+        background-color: black;
+        border: solid 1px #008209;
+    }
+
+    div.clock button:hover {
+        background-color: #008209;
+        color: black;
+        border: none;
+        cursor: pointer;
+    }
