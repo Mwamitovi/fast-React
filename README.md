@@ -31,7 +31,7 @@ and thus the `Color Organizer` has a "single source of truth".
 ### Assumptions
    - Configure your Version Control (Git-flow)
    - Fork the repository (https://github.com/Mwamitovi/fast-React)
-   - You are within branch, "feature/recipe-app"
+   - You are within branch, "feature/color-organizer-app"
 
 ### Configure
 
