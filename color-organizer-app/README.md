@@ -8,6 +8,12 @@ This is a modified version of the color organizer,
 The Color component has ben improved with some updating lifecycle methods.
 
 
+### Assumptions
+   - Configure your Version Control (Git-flow)
+   - Fork the repository (https://github.com/Mwamitovi/fast-React)
+   - You are within branch, "feature/update-lifecycle"
+
+
 ### Configure
 
    - To follow-closely, look for summarized verion of the app within
