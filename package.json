@@ -1,16 +1,20 @@
 {
-  "name": "color-organizer-app",
+  "name": "react-lifecycle-methods",
   "version": "1.0.0",
-  "description": "A React application, with state, and defined property types",
+  "description": "Exploring the component lifecycle in React",
   "main": "index.js",
   "scripts": {
     "build-color": "webpack --progress --config color.webpack.config.js",
     "prestart-color": "npm run build-color",
     "start-color": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-app/dist"
+    ,
+    "build-clock": "webpack --progress --config clock.webpack.config.js",
+    "prestart-clock": "npm run build-clock",
+    "start-clock": "opener http://localhost:3000 & httpster -p 3000 -d ./mounting-lifecycle-clock/dist"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/color-organizer-app"
+    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/update-lifecycle"
   },
   "keywords": [
     "React",
@@ -25,7 +29,7 @@
   "bugs": {
     "url": "https://github.com/MwamiTovi/fast-React/issues"
   },
-  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/color-organizer-app#readme",
+  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/update-lifecycle#readme",
   "dependencies": {
     "ajv": "^5.0.0",
     "d3": "^5.9.7",
