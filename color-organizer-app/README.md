@@ -7,6 +7,25 @@ This is a modified version of the color organizer,
 (see branch- feature/color-organizer-app). 
 The Color component has ben improved with some updating lifecycle methods.
 
+
+### Configure
+
+   - To follow-closely, look for summarized verion of the app within
+     folder `color-organizer-app/color-organizer-app.js`
+
+   - Study the "package.json" and "color.webpack.config.js", 
+     that is where the main file conventions/standards are located.
+
+   - Run `npm run-script start-color` to launch the app.
+     Behind the scenes, this script initiates a sequence of commands.
+      - prestart-color: `npm run build-color` that initiates webpack processes.
+      - build-color: `webpack --progress --config color.webpack.config.js` lanches webpack to build the app.
+      - start-color: `http://localhost:3000 & httpster -p 3000 -d ./color-organizer-app/dist` 
+        launches server at port 3000, and loads the contents of dist/ folder.
+
+   - And thus we have the stateful "color-organizer-app" with a "single state of truth".
+
+
 ### Lifecycle methods
 
 ``` JavaScript
