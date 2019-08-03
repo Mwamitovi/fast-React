@@ -4,9 +4,9 @@
   "description": "A React application, with state, and defined property types",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --progress",
-    "prestart": "npm run build",
-    "start": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-app/dist"
+    "build-color": "webpack --progress --config color.webpack.config.js",
+    "prestart-color": "npm run build-color",
+    "start-color": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-app/dist"
   },
   "repository": {
     "type": "git",
