@@ -46,7 +46,7 @@ export const color = (state={}, action) => {
             // we will return the current state: the default case.
             return state
     }
-}
+};
 
 
 export const colors = (state=[], action) => {
@@ -82,7 +82,7 @@ export const colors = (state=[], action) => {
         default:
             return state
     }
-}
+};
 
 
 export const sort = (state='SORTED_BY_DATE', action) => {
@@ -95,4 +95,4 @@ export const sort = (state='SORTED_BY_DATE', action) => {
         default:
             return state
     }
-}
+};
