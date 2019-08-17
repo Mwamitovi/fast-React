@@ -1,9 +1,13 @@
-import storeFactory from './store'
-import { addColor, removeColor, rateColor, sortColors } from './actions'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import App from './components/App';
+import storeFactory from './store';
 
 
 const store = storeFactory();
 
+window.React = React;
+window.store = store;
 
 /**
  * Dispatch()
@@ -18,16 +22,12 @@ const store = storeFactory();
  * send the necessary data as function arguments.
  */
 
+const _render = () => {
+    ReactDOM.render (
+        <App store={store} />,
+        document.getElementById('react-container')
+    )
+};
 
-store.dispatch(addColor('Uganda Blue', '#1122FF'));
-store.dispatch(rateColor('8658c1d0-9eda-4a90-95e1-8001e8eb6036', 5));
-store.dispatch(sortColor('title'));
-
-console.log('current state', store.getState());
-console.log('Go ahead, dispatch some actions...');
-
-window.store = store;
-window.addColor = addColor;
-window.removeColor = removeColor;
-window.rateColor = rateColor;
-window.sortColors = sortColors;
+store.subscribe(_render)
+_render()
