@@ -1,41 +1,36 @@
 {
-  "name": "react-lifecycle-methods",
-  "version": "1.0.0",
-  "description": "Exploring the component lifecycle in React",
+  "name": "color-organizer-redux",
+  "version": "3.0.0",
+  "description": "A sample Redux store with reducers and action creators",
   "main": "index.js",
   "scripts": {
-    "build-color": "webpack --progress --config color.webpack.config.js",
-    "prestart-color": "npm run build-color",
-    "start-color": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-app/dist"
-    ,
-    "build-clock": "webpack --progress --config clock.webpack.config.js",
-    "prestart-clock": "npm run build-clock",
-    "start-clock": "opener http://localhost:3000 & httpster -p 3000 -d ./mounting-lifecycle-clock/dist"
+    "build": "webpack --progress",
+    "prestart": "npm run build",
+    "start": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-redux/dist"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/update-lifecycle"
+    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/redux"
   },
   "keywords": [
     "React",
+    "redux",
     "state",
-    "setState",
-    "explicitly",
-    "passing",
-    "props"
+    "actions",
+    "reducer",
+    "dispatcher",
+    "store",
+    "middleware"
   ],
   "author": "Matovu Martin <matovu.synergy@gmail.com> (https://github.com/MwamiTovi)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/MwamiTovi/fast-React/issues"
   },
-  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/update-lifecycle#readme",
+  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/redux#readme",
   "dependencies": {
-    "ajv": "^5.0.0",
-    "d3": "^5.9.7",
     "httpster": "1.0.3",
-    "isomorphic-fetch": "^2.2.1",
-    "prop-types": "15.6.0",
+    "redux": "3.7.2",
     "react": "16.0.0",
     "react-dom": "16.0.0",
     "uuid": "3.3.2"
