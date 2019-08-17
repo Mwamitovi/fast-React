@@ -1,94 +1,90 @@
-Color Organizer Lifecycle
-=========================
+Color Organizer (Redux)
+=======================
 
 ## SYNOPSIS
 
-This is a modified version of the color organizer,
-(see branch- feature/color-organizer-app). 
-The Color component has ben improved with some updating lifecycle methods.
+Redux emerged as one of the clear winners in the field of Flux or Flux-like libraries. 
+Redux is based on Flux, and it was designed to tackle the challenge of understanding how 
+data changes flow through your application.
+
+We have implemented color organizer application, around the Redux concept (see branch- feature/redux). 
+Redux introduces reducers, which are pure functions that return a new state based on 
+the current state and an action. We also explore the use of middleware in creating a factory, that we later use to create our store - the entry point to changing our app state.
 
 
 ### Assumptions
    - Configure your Version Control (Git-flow)
    - Fork the repository (https://github.com/Mwamitovi/fast-React)
-   - You are within branch, "feature/update-lifecycle"
+   - You are within branch, "feature/redux"
 
 
-### Configure
+### Installation/Configure
 
    - To follow-closely, look for summarized verion of the app within
-     folder `color-organizer-app/color-organizer-app.js`
+     folder `color-organizer-redux/handle-state-with-redux.js`
 
-   - Study the "package.json" and "color.webpack.config.js", 
+   - Study the "package.json" and "webpack.config.js", 
      that is where the main file conventions/standards are located.
 
-   - Run `npm run-script start-color` to launch the app.
+   - Run this npm/yarn command to install dependencies:
+     ```
+     $ npm install or yarn install
+     ```
+
+   - Run this npm/yarn command to build the JavaScript bundle:
+     ```
+     $ npm run build or yarn build
+     ```
+
+   - Run this npm/yarn command to build the JavaScript bundle and 
+     open the browser to the app using the file api:
+     ```
+     $ npm start or yarn start
+     ```
      Behind the scenes, this script initiates a sequence of commands.
-      - prestart-color: `npm run build-color` that initiates webpack processes.
-      - build-color: `webpack --progress --config color.webpack.config.js` lanches webpack to build the app.
-      - start-color: `http://localhost:3000 & httpster -p 3000 -d ./color-organizer-app/dist` 
+      - prestart: `npm run build` that initiates webpack processes.
+      - build: `webpack --progress` lanches webpack to build the app.
+      - start: `http://localhost:3000 & httpster -p 3000 -d ./color-organizer-redux/dist` 
         launches server at port 3000, and loads the contents of dist/ folder.
 
-   - And thus we have the stateful "color-organizer-app" with a "single state of truth".
+   - And thus we have the stateful "color-organizer-redux" with one "store" - a redux concept.
 
 
-### Lifecycle methods
+### Redux features
 
-``` JavaScript
+You can interact with the store from the console in this demo:
 
-    class Color extends Component {
+```javascript
 
-        componentWillMount() {
-            this.style = { backgroundColor: "#CCC" }
-        }
+    // Dispatch an addColor action
+    store.dispatch(
+        addColor("Bonkers Blue", "#1122FF")
+    )
 
-        shouldComponentUpdate(nextProps) {
-            const { rating } = this.props
-            return rating !== nextProps.rating
-        }
+    // Rate an existing color (check state for ids)
+    store.dispatch(
+        rateColor("8658c1d0-9eda-4a90-95e1-8001e8eb6036", 5)
+    )
 
-        componentWillUpdate(nextProps) {
-            const { title, rating } = this.props
-            this.style = null
-            this.refs.title.style.backgroundColor = "red"
-            this.refs.title.style.color = "white"
-            alert(`${title}: rating ${rating} -> ${nextProps.rating}`)
-        }
+    // Sort colors by title or date or rating
+    store.dispatch(
+        sortColors("title")
+    )
 
-        componentDidUpdate(prevProps) {
-            const { title, rating } = this.props
-            const status = (rating > prevProps.rating) ? 'better' : 'worse'
-            console.log(`${title} is getting ${status}`)
-            this.refs.title.style.backgroundColor = ""
-            this.refs.title.style.color = "black"
-        }
+    // Change a colors rating (check state for ids)
+    store.dispatch(
+        removeColor("a5685c39-6bdc-4727-9188-6c9a00bf7f95")
+    )
 
-        render() {
-            const { title, color, rating, onRemove, onRate} = this.props
-            return (
-                <section className="color" style={this.style}>
-                    <h1 ref="title">{title}</h1>
-                    <button onClick={onRemove}>X</button>
-                    <div className="color"
-                         style={{ backgroundColor: color }}>
-                    </div>
-                    <div>
-                        <StarRating starsSelected={rating} onRate={onRate}/>
-                    </div>
-                </section>
-            )
-        }
+    // Get the store's current State
+    store.getState()
 
-    }
 ```
-
 
 ### Further help
 
     - This project reference: Learning React (Functional Web development with React & Redux)
       available at http://bit.ly/learning-react-2e
-
-    - To know more about node-sass, see https://www.npmjs.com/package/node-sass#readme
 
     - Want to utilize httpster more, read https://www.npmjs.com/package/httpster#readme
 
