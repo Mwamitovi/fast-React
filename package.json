@@ -1,38 +1,40 @@
 {
-  "name": "color-organizer-redux",
-  "version": "3.0.0",
+  "name": "color-organizer-explicit",
+  "version": "4.1.0",
   "description": "A sample Redux store with reducers and action creators",
   "main": "index.js",
   "scripts": {
     "build": "webpack --progress",
     "prestart": "npm run build",
-    "start": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-redux/dist"
+    "start": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-explicit/dist"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/redux"
+    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/react-redux"
   },
   "keywords": [
     "React",
     "redux",
     "state",
-    "actions",
-    "reducer",
-    "dispatcher",
-    "store",
-    "middleware"
+    "setState",
+    "storeFactory",
+    "explicitly",
+    "passing",
+    "props"
   ],
   "author": "Matovu Martin <matovu.synergy@gmail.com> (https://github.com/MwamiTovi)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/MwamiTovi/fast-React/issues"
   },
-  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/redux#readme",
+  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/react-redux#readme",
   "dependencies": {
     "httpster": "1.0.3",
     "redux": "3.7.2",
+    "prop-types": "15.6.0",
     "react": "16.0.0",
     "react-dom": "16.0.0",
+    "react-icons": "2.2.5",
     "uuid": "3.3.2"
   },
   "devDependencies": {
