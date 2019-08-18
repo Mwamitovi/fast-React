@@ -273,8 +273,10 @@ class App extends Component {
      * which will rerender our UI. 
      * 
      * In componentWillUnmount, we can invoke the unsubscribe function and 
-     * stop listening to the store. Because the App component itself triggers the UI update, 
-     * there is no longer a need to subscribe to the store from the entry ./index.js file; 
+     * stop listening to the store. 
+     * Because the App component itself triggers the UI update, 
+     * there is no longer a need to subscribe to the store from 
+     * the entry ./index.js file; 
      * we are listening to store changes from the same component that 
      * adds the store to the context, App.
      */
@@ -412,7 +414,7 @@ Color.defaultProps = {
 export default Color;
 
 
-// ColorList is now a component class, and can access context via this.context. 
+// Color is now a component class, and can access context via this.context. 
 // Colors are now read directly from the store via store.getState(). 
 // The same rules apply that do for stateless functional components. 
 // contextTypes must be defined on the instance.
