@@ -15,7 +15,7 @@
  */
 
 
-// Explicitly Passing the Store
+// 1 - EXPLICITLY PASSING THE STORE
 
 
 /**
@@ -214,3 +214,215 @@ export default ColorList;
  */
 
 
+// 2 - PASSING THE STORE VIA CONTEXT
+
+
+/**
+ * Understanding Context
+ * 
+ * Imagine that we have some goods to move within Uganda (Country) from Kampala, to Arua.
+ * We could use a train, but that would require that we lay tracks through 
+ * at least nine districts so that our cargo can travel to Arua. 
+ * This is like “explicitly passing the store” down the component tree from the root to the leaves. 
+ * You have to “lay tracks” through every component that comes between the origin and the destination.
+ * 
+ * If using a train is like explicitly passing the store through props, 
+ * then implicitly passing the store via context is like using a jet airliner. 
+ * When a jet flies from Kampala to Arua, it flies over at least nine districts — no tracks required.
+ * 
+ * Similarly, we can take advantage of a React feature called ``context`` that 
+ * allows us to pass variables to components without having to explicitly pass them down through 
+ * the tree as properties. Any child component can access these context variables.
+ */
+
+
+// If we were to pass the store using context in our color organizer app,
+// the first step would be to refactor the App component to hold context.
+// The App component will also need to listen to the store so that 
+// it can trigger a UI update every time the state changes.
+
+import { PropTypes, Component } from 'react';
+import SortMenu from './SortMenu';
+import ColorList from './ColorList';
+import AddColorForm from './AddColorForm';
+import { sortFunction } from '../lib/array-helpers';
+
+
+class App extends Component {
+    /**
+     * First, adding context to a component requires that 
+     * we use the getChildContext() lifecycle function. 
+     * It will return the object that defines the context. 
+     * In this case, we add the store to the context, which we can access through props.
+     * 
+     * Next, we need to specify childContextTypes on the component instance and
+     * define your context object. This is similar to adding propTypes or 
+     * defaultProps to a component instance. 
+     * However, for context to work, we must take this step.
+     * At this point, any children of the App component will 
+     * have access to the store via the context. 
+     * They can invoke store.getState() and store.dispatch() directly. 
+     * 
+     * The final step is to subscribe to the store and 
+     * update the component tree every time the store updates state. 
+     * This can be achieved with the mounting lifecycle functions,
+     * see branch - feature/update-lifecycle).
+     * 
+     * In componentWillMount, we can subscribe to the store and 
+     * use this.forceUpdate to trigger the updating lifecycle, 
+     * which will rerender our UI. 
+     * 
+     * In componentWillUnmount, we can invoke the unsubscribe function and 
+     * stop listening to the store. Because the App component itself triggers the UI update, 
+     * there is no longer a need to subscribe to the store from the entry ./index.js file; 
+     * we are listening to store changes from the same component that 
+     * adds the store to the context, App.
+     */
+    getChildContext() {
+        return {
+            store: this.props.store
+        }
+    };
+
+    componentWillMount() {
+        this.unsubscribe = store.subscribe( () => this.forceUpdate() )
+    };
+
+    componentWillUnmount() {
+        this.unsubscribe()
+    };
+
+    render() {
+        const { colors, sort } = store.getState()
+        const sortedColors = [...colors].sort(sortFunction(sort))
+        
+        return (
+            <div className="app">
+                <SortMenu />
+                <AddColorForm />
+                <ColorList colors={sortedColors} />
+            </div>
+        )
+    };
+};
+
+App.propTypes = {
+    store: PropTypes.object.isRequired
+};
+
+App.childContextTypes = {
+    store: PropTypes.object.isRequired
+};
+
+export default App;
+
+
+// Now, let’s refactor the AddColorForm component to retrieve the store and 
+// dispatch the ADD_COLOR action directly.
+
+
+const AddColorForm = (props, { store }) => {
+    /**
+     * The context object is passed to stateless functional components as 
+     * the second argument, after props. 
+     * We can use object destructuring to obtain the store 
+     * from this object directly in the arguments. 
+     * 
+     * In order to use the store, we must define contextTypes on the AddColorForm instance. 
+     * This is where we tell React which context variables this component will use. 
+     * This is a required step. Without it, the store cannot be retrieved from the context.
+     */
+
+    let _title, _color;
+
+    const submit = e => {
+        e.preventDefault()
+        store.dispatch(addColor(_title.value, _color.value))
+        _title.value = ''
+        _color.value = '#000000'
+        _title.focus()
+    };
+
+    return (
+        <form className="add-color" onSubmit={submit}>
+            <input ref={input => _title = input}
+                type="text"
+                placeholder="color title..." required/>
+            <input ref={input => _color = input}
+                type="color" required/>
+            <button>ADD</button>
+        </form>
+    )
+};
+    
+AddColorForm.contextTypes = {
+    store: PropTypes.object
+};
+
+
+// OK, let’s now take a look at how to use context in a component class. 
+// The Color component can retrieve the store and 
+// dispatch RATE_COLOR and REMOVE_COLOR actions directly.
+
+import { PropTypes, Component } from 'react';
+import StarRating from './StarRating';
+import TimeAgo from './TimeAgo';
+import FaTrash from 'react-icons/lib/fa/trash-o';
+import { rateColor, removeColor } from '../actions';
+
+
+class Color extends Component {
+    
+    render() {
+        const { id, title, color, rating, timestamp } = this.props;
+        const { store } = this.context;
+
+        return (
+            <section className="color" style={this.style}>
+                <h1 ref="title">{title}</h1>
+                <button onClick={() => store.dispatch( removeColor(id) )}>
+                    <FaTrash />
+                </button>
+                <div className="color" style={{ backgroundColor: color }}></div>
+                <TimeAgo timestamp={timestamp} />
+                <div>
+                    <StarRating starsSelected={rating}
+                        onRate={rating => store.dispatch( rateColor(id, rating) )} />
+                </div>
+            </section>
+        )
+    }
+};
+
+Color.contextTypes = {
+    store: PropTypes.object
+};
+
+Color.propTypes = {
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    color: PropTypes.string.isRequired,
+    rating: PropTypes.number
+};
+
+Color.defaultProps = {
+    rating: 0
+};
+
+export default Color;
+
+
+// ColorList is now a component class, and can access context via this.context. 
+// Colors are now read directly from the store via store.getState(). 
+// The same rules apply that do for stateless functional components. 
+// contextTypes must be defined on the instance.
+
+// Retrieving the store from the context is a nice way to reduce your boilerplate,
+// but this is not something that is required for every application. 
+// ** Dan Abramov, the creator of Redux, 
+//    even suggests that these patterns do not need to be religiously followed:
+//    Separating the container and presentational components is often a good idea, 
+//    but you shouldn’t take it as dogma. Only do this when it truly reduces the of your codebase.
+
+
+// 
