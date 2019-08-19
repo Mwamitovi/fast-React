@@ -4,8 +4,6 @@
 
 jest
 
-assets/
-
 # Logs
 logs
 *.log
