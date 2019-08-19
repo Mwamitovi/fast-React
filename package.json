@@ -4,13 +4,15 @@
   "description": "A React application, with state, and defined property types",
   "main": "index.js",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d color-organizer-app/dist -b feature/color-organizer-app",
     "build": "webpack --progress",
     "prestart": "npm run build",
     "start": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-app/dist"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/color-organizer-app"
+    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/color-organizer-app#readme"
   },
   "keywords": [
     "React",
@@ -25,9 +27,10 @@
   "bugs": {
     "url": "https://github.com/MwamiTovi/fast-React/issues"
   },
-  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/color-organizer-app#readme",
+  "homepage": "https://mwamitovi.github.io/color-organizer-app/",
   "dependencies": {
     "ajv": "^5.0.0",
+    "gh-pages": "^2.1.1",
     "httpster": "1.0.3",
     "prop-types": "15.6.0",
     "react": "16.0.0",
