@@ -61,7 +61,7 @@ const saver = store => next => action => {
  */
 
 
-const storeFactory = (initialState=stateData) => {
+const storeFactory = (initialState=stateData) => (
     // applyMiddleware: creates a store enhancer that 
     // applies middleware to the dispatch method of the Redux store. 
     // This is handy for a variety of tasks, 
@@ -89,10 +89,10 @@ const storeFactory = (initialState=stateData) => {
             JSON.parse(localStorage['redux-store']) :
             initialState
     )
-}
+);
 
 // Instead of exporting the store directly, 
 // we export a function, a factory that can be used to create stores. 
 // If invoked, this factory will create and return a 
 // store that incorporates logging and saving.
-export default storeFactory
+export default storeFactory;
