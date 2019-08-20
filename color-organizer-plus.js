@@ -427,4 +427,149 @@ export default Color;
 //    but you shouldn’t take it as dogma. Only do this when it truly reduces the of your codebase.
 
 
-// 
+// 3 - PRESENTATIONAL VS CONTAINER COMPONENTS
+
+
+/**
+ * In the above approach (passing the store via context),
+ * the Color component retrieved the store via context and 
+ * used it to dispatch RATE_COLOR and REMOVE_COLOR actions directly. 
+ * Before that, the ColorList component retrieved the 
+ * store via context to read the current list of colors from state.
+ * In both examples, 
+ * these components rendered UI elements by interacting directly with the Redux store.
+ * We can improve the architecture of our application by 
+ * decoupling the store from components that render the UI.
+ */
+
+
+/**
+ * Presentational components are components that only render UI elements.
+ * They are reusable. 
+ * They are easy to swap out and easy to test. 
+ * They can be composed to create the UI.
+ * They can be reused across browser applications that may use different data libraries.
+ * 
+ * Container components - are components that connect presentational components to the data.
+ * They are not concerned with the UI at all.
+ * Their main focus is connecting the presentation components to the data architecture.
+ * They can be reused across device platforms to connect the
+ * native presentational components to the data.
+ */
+
+
+// The AddColorForm, ColorList, Color, StarRating, and Star components that 
+// we created earlier are examples of presentational components. 
+// They receive data via props, and when events occur, they invoke callback function properties. 
+// We are already pretty familiar with presentation components, 
+// so let’s see how we can use them to create container components.
+
+
+// The App component will mostly remain the same. 
+// It still defines the store in the context so that it can be retrieved by child components. 
+// Instead of rendering the SortMenu, AddColorForm, and ColorList components, 
+// however, it will render containers for those items. 
+// The Menu container will connect the SortMenu, NewColor will 
+// connect the AddColorForm, and Colors will connect the ColorList.
+
+
+class App extends Component {
+    // So in this case, 
+    // we only update the render() method within the App component (version in #2)
+    // And include all the other attributes the same way.
+    render() {
+        return (
+            <div className="app">
+                <Menu />
+                <NewColor />
+                <Colors />
+            </div>
+        )
+    }
+};
+
+
+// Any time you want to connect a presentational component to some data, you can wrap that 
+// component in a container that controls the properties and connects them to data. 
+// The NewColor, Menu, and Colors containers can all be defined in the same file.
+
+import { PropTypes } from 'react';
+import AddColorForm from './ui/AddColorForm';
+import SortMenu from './ui/SortMenu';
+import ColorList from './ui/ColorList';
+import { addColor, removeColor, rateColor, sortColors } from '../actions';
+import { sortFunction } from '../lib/array-helpers';
+
+
+export const Menu = (props, { store }) => (
+    /**
+     * The Menu container renders the SortMenu component. 
+     * It passes the current sort property from the store’s state and 
+     * dispatches sort actions when the user selects a different menu item.
+     */
+    <SortMenu sort={ store.getState().sort } 
+        onSelect={sortBy => store.dispatch(sortColors(sortBy))} 
+    />
+);
+
+Menu.contextTypes = {
+    store: PropTypes.object
+};
+
+
+export const NewColor = (props, { store }) => (
+    /**
+     * The NewColor container does not render UI. 
+     * Instead, it renders the AddColorForm component and 
+     * handles onNewColor events from this component. 
+     * This container component retrieves the store from the context and 
+     * uses it to dispatch ADD_COLOR actions. 
+     * It contains the AddColorForm component and connects it to the Redux store.
+     */
+    <AddColorForm onNewColor={
+        (title, color) => store.dispatch(addColor(title,color))} 
+    />
+);
+
+NewColor.contextTypes = { 
+    store: PropTypes.object 
+};
+
+
+export const Colors = (props, { store }) => {
+    /**
+     * The Colors container retrieves the store via context and 
+     * renders a ColorList component with colors from the store’s current state. 
+     * It also handles onRate and onRemove events invoked from the ColorList component. 
+     * When these events occur, the Colors container dispatches the appropriate actions.
+     */
+    const { colors, sort } = store.getState();
+    const sortedColors = [...colors].sort(sortFunction(sort));
+
+    return (
+        <ColorList colors={sortedColors}
+            onRemove={id => store.dispatch( removeColor(id) )}
+            onRate={(id, rating) => store.dispatch( rateColor(id, rating) )}
+        />
+    )
+};
+
+Colors.contextTypes = {
+    store: PropTypes.object
+};
+
+
+// All of the Redux functionality is connected within the 
+// Menu, NewColor and Colors components.
+// Notice that all of the action creators are imported and used in this one place. 
+// This is the only file that invokes store.getState or store.dispatch.
+
+// This approach of separating UI components from containers that 
+// connect them to data is generally a good approach. 
+// However, this could be overkill for a small project,
+// proof of concept, or prototype.
+
+// In the next section, we introduce a new library, React Redux. 
+// This library can be used to quickly add the Redux store to context and 
+// create container components.
+
