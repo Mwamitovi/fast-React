@@ -6,7 +6,7 @@ process.noDeprecation = true
 module.exports = {
   entry: "./color-organizer-app/src/index.js",
   output: {
-      path: path.join(__dirname, 'color-organizer-app/dist', 'assets'),
+      path: path.join(__dirname, 'dist', 'assets'),
       filename: "bundle.js",
       sourceMapFilename: 'bundle.map'
   },
