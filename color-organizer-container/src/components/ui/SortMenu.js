@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
-import { sortColors } from '../actions';
-import '../../stylesheets/Menu.scss';
+import { sortColors } from '../../actions';
+import '../../../stylesheets/Menu.scss';
 
 
 const options = {

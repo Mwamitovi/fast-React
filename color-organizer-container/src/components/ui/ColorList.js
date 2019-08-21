@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import Color from './Color';
-import '../../stylesheets/ColorList.scss';
+import '../../../stylesheets/ColorList.scss';
 
 
 // we map over the array of colors, and display a list of colors

@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
-import '../../stylesheets/AddColorForm.scss';
-import { addColor } from '../actions'
+import '../../../stylesheets/AddColorForm.scss';
+import { addColor } from '../../actions'
 
 
 // Render and handles form functionality

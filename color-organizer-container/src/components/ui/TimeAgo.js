@@ -1,4 +1,4 @@
-import { ago } from '../lib/time-helpers';
+import { ago } from '../../lib/time-helpers';
 
 
 const TimeAgo = ({timestamp}) => {

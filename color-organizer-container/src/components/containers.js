@@ -6,7 +6,7 @@ import { addColor, removeColor, rateColor, sortColors } from '../actions';
 import { sortFunction } from '../lib/array-helpers';
 
 
-export const Menu = (props, {store}) => (
+export const Menu = (props, { store }) => (
     <SortMenu 
         sort={store.getState().sort}
         onSelect={sortBy => store.dispatch(sortColors(sortBy))}
@@ -18,7 +18,7 @@ Menu.contextTypes = {
 };
 
 
-export const NewColor = (props, {store}) => (
+export const NewColor = (props, { store }) => (
     <AddColorForm 
         onNewColor={(title, color) => store.dispatch( addColor(title, color))}
     />
@@ -29,7 +29,7 @@ NewColor.contextTypes = {
 };
 
 
-export const Colors = (props, {store}) => {
+export const Colors = (props, { store }) => {
 
     const { colors, sort } = store.getState();
     const sortedColors = [...colors].sort(sortFunction(sort));

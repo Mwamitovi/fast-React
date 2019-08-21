@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import StarRating from './StarRating';
 import TimeAgo from './TimeAgo';
 import FaTrash from 'react-icons/lib/fa/trash-o';
-import { rateColor, removeColor } from '../actions';
-import '../../stylesheets/Color.scss';
+import { rateColor, removeColor } from '../../actions';
+import '../../../stylesheets/Color.scss';
 
 
 class Color extends Component {

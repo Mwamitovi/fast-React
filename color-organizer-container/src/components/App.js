@@ -8,3 +8,5 @@ const App = () => (
         <Colors />
     </div>
 );
+
+export default App;
