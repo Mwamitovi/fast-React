@@ -6,7 +6,7 @@
   "scripts": {
     "build-site": "webpack --progress --config site.webpack.config.js",
     "prestart-site": "npm run build-site",
-    "start-site": "opener http://localhost:3000 & httpster -p 3000 -d ./company-site/dist",
+    "start-site": "opener http://localhost:3000 & httpster -p 3000 -d ./company-website/dist",
     "build-color": "webpack --progress",
     "prestart-color": "npm run build-color",
     "start-color": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-explicit/dist"
