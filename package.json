@@ -1,16 +1,19 @@
 {
-  "name": "color-organizer-explicit",
+  "name": "color-organizer-and-company-website",
   "version": "4.1.0",
-  "description": "A sample Redux store with reducers and action creators",
+  "description": "Add routing functionalityto a react app",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --progress",
-    "prestart": "npm run build",
-    "start": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-explicit/dist"
+    "build-site": "webpack --progress --config site.webpack.config.js",
+    "prestart-site": "npm run build-site",
+    "start-site": "opener http://localhost:3000 & httpster -p 3000 -d ./company-site/dist",
+    "build-color": "webpack --progress",
+    "prestart-color": "npm run build-color",
+    "start-color": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-explicit/dist"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/react-redux"
+    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/react-router"
   },
   "keywords": [
     "React",
@@ -27,7 +30,7 @@
   "bugs": {
     "url": "https://github.com/MwamiTovi/fast-React/issues"
   },
-  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/react-redux#readme",
+  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/react-router#readme",
   "dependencies": {
     "httpster": "1.0.3",
     "prop-types": "15.6.0",
