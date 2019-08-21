@@ -1,9 +1,12 @@
 {
-  "name": "color-organizer-explicit",
+  "name": "color-organizer",
   "version": "4.1.0",
   "description": "A sample Redux store with reducers and action creators",
   "main": "index.js",
   "scripts": {
+    "build-ner": "webpack --progress --config webpack.config.ner.js",
+    "prestart-ner": "npm run build-ner",
+    "start-ner": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-container/dist",
     "build-cont": "webpack --progress --config webpack.config.context.js",
     "prestart-cont": "npm run build-cont",
     "start-cont": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-context/dist",
