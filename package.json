@@ -4,7 +4,7 @@
   "description": "A sample Redux store with reducers and action creators",
   "main": "index.js",
   "scripts": {
-    "build-exp": "webpack --progress",
+    "build-exp": "webpack --progress --config webpack.config.exp.js",
     "prestart-exp": "npm run build-exp",
     "start-exp": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-explicit/dist"
   },
