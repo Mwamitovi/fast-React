@@ -21,7 +21,7 @@ const SortMenu = (props, { store }) => (
                         "selected" : null
                 }
                 onClick={e => {
-                    e.preventDefault()
+                    e.preventDefault();
                     store.dispatch(sortColors(options[item]))
                 }}>{item}</a>
         )}
