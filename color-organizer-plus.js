@@ -437,7 +437,8 @@ export default Color;
  * Before that, the ColorList component retrieved the 
  * store via context to read the current list of colors from state.
  * In both examples, 
- * these components rendered UI elements by interacting directly with the Redux store.
+ * these components rendered UI elements by 
+ * interacting directly with the Redux store.
  * We can improve the architecture of our application by 
  * decoupling the store from components that render the UI.
  */
