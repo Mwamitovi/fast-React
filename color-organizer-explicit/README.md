@@ -31,7 +31,7 @@ only have a few nested components.
     ```
 
    - To follow-closely, look for summarized verion of the app within
-     folder `color-organizer-app/color-organizer-plus.js`
+     folder `fast-react/color-organizer-plus.js`
 
    - Study the "package.json" and "webpack.config.exp.js", 
      that is where the main file conventions/standards are located.
