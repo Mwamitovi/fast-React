@@ -3,28 +3,24 @@ import PropTypes from 'prop-types';
 import StarRating from './StarRating';
 import TimeAgo from './TimeAgo';
 import FaTrash from 'react-icons/lib/fa/trash-o';
-import { rateColor, removeColor } from '../actions';
+import { rateColor, removeColor } from '../../actions';
 import '../../stylesheets/Color.scss';
 
 
 class Color extends Component {
-    // The Color component can retrieve the store and 
-    // dispatch RATE_COLOR and REMOVE_COLOR actions directly.
+
     render() {
-        const { id, title, color, rating, timestamp } = this.props;
-        const { store } = this.context;
+        const { title, color, rating, timestamp, onRate, onRemove } = this.props;
         return (
             <section className="color" style={this.style}>
                 <h1 ref="title">{title}</h1>
-                <button onClick={() => store.dispatch(removeColor(id) )}>
+                <button onClick={onRemove}>
                     <FaTrash />
                 </button>
                 <div className="color" style={{ backgroundColor: color }}></div>
                 <TimeAgo timestamp={timestamp} />
                 <div>
-                    <StarRating starsSelected={rating} 
-                        onRate={rating => store.dispatch(rateColor(id, rating) )} 
-                    />
+                    <StarRating starsSelected={rating} onRate={onRate} />
                 </div>
             </section>
         )
@@ -32,18 +28,17 @@ class Color extends Component {
 };
 
 Color.propTypes = {
-    id: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
-    rating: PropTypes.number
+    rating: PropTypes.number,
+    onRate: PropTypes.func,
+    onRemove: PropTypes.func
 };
 
 Color.defaultProps = {
-    rating: 0
-};
-
-Color.contextTypes = {
-    store: PropTypes.object
+    rating: 0,
+    onRate: f=>f,
+    onRate: f=>f
 };
 
 export default Color;
