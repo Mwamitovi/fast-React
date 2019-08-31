@@ -1,16 +1,15 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import '../../stylesheets/AddColorForm.scss';
-import { addColor } from '../actions'
 
 
 // Render and handles form functionality
-const AddColorForm = (props, { store }) => {
+const AddColorForm = ({ onNewColor=f=>f }) => {
     let _title, _color;
 
     const submit = e => {
         e.preventDefault()
-        store.dispatch( addColor(_title.value, _color.value) )
+        onNewColor(_title.value, _color.value)
         _title.value = ''
         _color.value = '#000000'
         _title.focus()
@@ -28,8 +27,8 @@ const AddColorForm = (props, { store }) => {
     )
 };
 
-AddColorForm.contextTypes = {
-    store: PropTypes.object
+AddColorForm.propTypes = {
+    onNewColor: PropTypes.func
 };
 
 export default AddColorForm;
