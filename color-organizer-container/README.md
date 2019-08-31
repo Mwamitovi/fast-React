@@ -9,8 +9,7 @@ Instead of passing data up the tree through two-way function binding,
 we can dispatch actions directly from child components to update application state.
 We explore how the Redux store can be used without any additional frameworks.
 
-In the above approach (see- ),
-the Color component retrieved the store via context and used it to dispatch actions directly. 
+In the above approach (color-organizer-context: https://github.com/Mwamitovi/fast-React/tree/feature/react-redux/color-organizer-context#readme), the Color component retrieved the store via context and used it to dispatch actions directly. 
 And the ColorList component retrieved the store via context to read the current list of colors from state.
 In both scenarios, these components rendered UI elements by interacting directly with the Redux store.
 We can improve the architecture of our app by decoupling the store from components that render the UI.
