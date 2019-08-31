@@ -9,7 +9,7 @@ Instead of passing data up the tree through two-way function binding,
 we can dispatch actions directly from child components to update application state.
 We explore how the Redux store can be used without any additional frameworks.
 
-The drawback of using the first approach (see- )
+The drawback of using the first approach (color-organizer-explicit: https://github.com/Mwamitovi/fast-React/tree/feature/react-redux/color-organizer-explicit#readme)
 is that we have to explicitly pass the store to child components,
 which means slightly more code and slightly more headaches than with other approaches.
 
