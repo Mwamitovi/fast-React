@@ -4,9 +4,9 @@ var path = require("path");
 process.noDeprecation = true
 
 module.exports = {
-  entry: "./color-organizer-redux/src/index.js",
+  entry: "./color-organizer-react-redux/src/index.js",
   output: {
-      path: path.join(__dirname, 'color-organizer-redux/dist', 'assets'),
+      path: path.join(__dirname, 'color-organizer-react-redux/dist', 'assets'),
       filename: "bundle.js",
       sourceMapFilename: 'bundle.map'
   },
