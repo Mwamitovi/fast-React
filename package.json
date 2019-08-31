@@ -1,15 +1,11 @@
 {
-  "name": "color-organizer-and-company-website",
-  "version": "4.1.0",
-  "description": "Add routing functionalityto a react app",
+  "name": "react-router",
+  "version": "4.2.0",
+  "description": "Add routing functionality to react app",
   "main": "index.js",
   "scripts": {
-    "build-site": "webpack --progress --config site.webpack.config.js",
-    "prestart-site": "npm run build-site",
-    "start-site": "opener http://localhost:3000 & httpster -p 3000 -d ./company-website/dist",
-    "build-color": "webpack --progress",
-    "prestart-color": "npm run build-color",
-    "start-color": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-explicit/dist"
+    "start-site": "opener http://localhost:3000 & webpack-dev-server --config ./site.webpack.config.js",
+    "start-color": "opener http://localhost:3000 & webpack-dev-server --config ./webpack.config.js"
   },
   "repository": {
     "type": "git",
@@ -33,7 +29,6 @@
   "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/react-router#readme",
   "dependencies": {
     "httpster": "1.0.3",
-    "mdbreact": "4.19.0",
     "prop-types": "15.6.0",
     "react": "16.9.0",
     "react-dom": "16.9.0",
@@ -55,6 +50,8 @@
     "postcss-loader": "2.0.6",
     "sass-loader": "6.0.6",
     "style-loader": "0.18.2",
-    "webpack": "3.6.0"
+    "webpack": "3.6.0",
+    "optimize-css-assets-webpack-plugin": "3.2.0",
+    "webpack-dev-server": "2.7.1"
   }
 }
