@@ -1,86 +1,60 @@
-Color Organizer Lifecycle
-=========================
+Color Organizer (Passing the Redux Store Explicitly)
+====================================================
 
 ## SYNOPSIS
 
 This is a modified version of the color organizer,
 (see branch- feature/color-organizer-app). 
-The Color component has ben improved with some updating lifecycle methods.
+Instead of passing data up the tree through two-way function binding,
+we can dispatch actions directly from child components to update application state.
+We explore how the Redux store can be used without any additional frameworks.
+
+The first, and most logical, way to incorporate the store into your UI is to 
+pass it down the component tree explicitly as a property. 
+This approach is simple and works very well for smaller apps that 
+only have a few nested components.
 
 
 ### Assumptions
    - Configure your Version Control (Git-flow)
-   - Fork the repository (https://github.com/Mwamitovi/fast-React)
-   - You are within branch, "feature/update-lifecycle"
+   - Clone the repository (https://github.com/Mwamitovi/fast-React)
+   - You are within branch, "feature/react-redux"
+   - Yarn is an alternative node package manager, by facebook.
 
 
-### Configure
+### Clone and Install
+
+## Installation
+    Run this command to install dependencies.
+    ```
+    $ npm install or yarn
+    ```
 
    - To follow-closely, look for summarized verion of the app within
-     folder `color-organizer-app/color-organizer-app.js`
+     folder `color-organizer-app/color-organizer-plus.js`
 
-   - Study the "package.json" and "color.webpack.config.js", 
+   - Study the "package.json" and "webpack.config.exp.js", 
      that is where the main file conventions/standards are located.
 
-   - Run `npm run-script start-color` to launch the app.
-     Behind the scenes, this script initiates a sequence of commands.
-      - prestart-color: `npm run build-color` that initiates webpack processes.
-      - build-color: `webpack --progress --config color.webpack.config.js` lanches webpack to build the app.
-      - start-color: `http://localhost:3000 & httpster -p 3000 -d ./color-organizer-app/dist` 
+## Build
+    Run this command to build the JavaScript Bundle
+    ```
+    $ npm run build-exp or yarn build-exp
+    ```
+
+#### Run
+    Run this command to build the JavaScript Bundle and open the browser to the app using the file api.
+    ```
+    $ npm start-exp or yarn start-exp
+    ```
+
+    Behind the scenes, this script initiates a sequence of commands.
+      - prestart-exp: `npm run build-exp` that initiates webpack processes.
+      - build-exp: `webpack --progress --config webpack.config.exp.js` lanches webpack to build the app.
+      - start-exp: `http://localhost:3000 & httpster -p 3000 -d ./color-organizer-explicit/dist` 
         launches server at port 3000, and loads the contents of dist/ folder.
 
-   - And thus we have the stateful "color-organizer-app" with a "single state of truth".
-
-
-### Lifecycle methods
-
-``` JavaScript
-
-    class Color extends Component {
-
-        componentWillMount() {
-            this.style = { backgroundColor: "#CCC" }
-        }
-
-        shouldComponentUpdate(nextProps) {
-            const { rating } = this.props
-            return rating !== nextProps.rating
-        }
-
-        componentWillUpdate(nextProps) {
-            const { title, rating } = this.props
-            this.style = null
-            this.refs.title.style.backgroundColor = "red"
-            this.refs.title.style.color = "white"
-            alert(`${title}: rating ${rating} -> ${nextProps.rating}`)
-        }
-
-        componentDidUpdate(prevProps) {
-            const { title, rating } = this.props
-            const status = (rating > prevProps.rating) ? 'better' : 'worse'
-            console.log(`${title} is getting ${status}`)
-            this.refs.title.style.backgroundColor = ""
-            this.refs.title.style.color = "black"
-        }
-
-        render() {
-            const { title, color, rating, onRemove, onRate} = this.props
-            return (
-                <section className="color" style={this.style}>
-                    <h1 ref="title">{title}</h1>
-                    <button onClick={onRemove}>X</button>
-                    <div className="color"
-                         style={{ backgroundColor: color }}>
-                    </div>
-                    <div>
-                        <StarRating starsSelected={rating} onRate={onRate}/>
-                    </div>
-                </section>
-            )
-        }
-
-    }
-```
+   - And thus we have the stateful "color-organizer-app" with the "store passed explicitly".
 
 
 ### Further help
