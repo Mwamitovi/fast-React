@@ -178,7 +178,7 @@ const App = () => (
 export default App;
 
 
-// At present, we can test our application by adding the id parameter directly to the browser’s location bar.
+// For now, we can test our app by adding the id parameter directly to the browser’s location bar.
 // However, users will need a way to navigate to the details view as well.
 // This time, the NavLink component will not be used to handle the 
 // navigation from the list of colors to a color’s details. 
@@ -311,6 +311,7 @@ import { NavLink } from 'react-router-dom';
 
 
 const selectedStyle = { color: 'red' };
+
 const Menu = ({ match }) => (
     <nav className="menu">
         <NavLink to="/" style={match.isExact && selectedStyle}>
