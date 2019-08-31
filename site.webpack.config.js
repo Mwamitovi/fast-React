@@ -1,4 +1,5 @@
 var webpack = require("webpack");
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 var path = require("path");
 
 process.noDeprecation = true
@@ -8,9 +9,15 @@ module.exports = {
   output: {
       path: path.join(__dirname, 'company-website/dist', 'assets'),
       filename: "bundle.js",
+      publicPath: "assets",
       sourceMapFilename: 'bundle.map'
   },
   devtool: '#source-map',
+  devServer: {
+    inline: true,
+    contentBase: './dist',
+    port: 3000
+  },
   module: {
       rules: [
           {
@@ -46,11 +53,16 @@ module.exports = {
               NODE_ENV: JSON.stringify("development")
           }
       }),
-
       new webpack.optimize.UglifyJsPlugin({
           sourceMap: true,
           warnings: false,
           mangle: false
-      })
+      }),
+      new OptimizeCssAssetsPlugin({
+        assetNameRegExp: /\.optimize\.css$/g,
+        cssProcessor: require('cssnano'),
+        cssProcessorOptions: {discardComments: {removeAll: true}},
+        canPrint: true
+    })
   ]
 }
