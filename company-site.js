@@ -100,7 +100,7 @@ window.React = React;
  *
  * At this point, we can run the app and physically type the routes into
  * the browser’s location bar to watch the content change.
- * For example, type http://localhost:3000/#/ about into the
+ * For example, type http://localhost:3000/#/about into the
  * location bar and watch the About component render.
  */
 
@@ -347,7 +347,7 @@ export const About = ({ match }) =>
  */
 
 
-// Let’s create a submenu for the About section. 
+// Let’s create a submenu for the "About" section. 
 // We will use NavLink components and set the activeStyle to 
 // the same activeStyle used in the MainMenu.
 
@@ -362,7 +362,7 @@ export const AboutMenu = ({match}) => (
      * All of the NavLink components use the activeStyle property except for the first one.
      * The activeStyle will set the style property for the link when
      * the location matches to the link’s route.
-     * For instance, when the user navigates to http://localhost:3000/ about/services,
+     * For instance, when the user navigates to http://localhost:3000/#/about/services,
      * the Services NavLink will render a white background.
      * 
      * The first NavLink component does not use activeStyle.
@@ -424,7 +424,7 @@ export const About = ({ match }) => (
     /**
      * This About component will be reused across the entire section.
      * The location will tell the app which subsection to render. 
-     * For example, when the location is http://localhost:3000/about/history, 
+     * For example, when the location is http://localhost:3000/#/about/history, 
      * the History component will be rendered inside of the About component.
      * 
      * This time, we are not using a Switch component. 
@@ -451,7 +451,7 @@ export const About = ({ match }) => (
  * Sometimes you want to redirect users from one route to another. 
  * For instance, we can make sure that if users try 
  * to access content via http://localhost:3000/services,
- * they get redirected to the correct route: http://localhost:3000/about/services.
+ * they get redirected to the correct route: http://localhost:3000/#/about/services.
  */
 
 
