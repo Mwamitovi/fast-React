@@ -693,12 +693,12 @@ const mapDispatchToProps = dispatch => ({
  * When the ColorList raises onRate or onRemove events, 
  * data about the color to rate or remove is obtained and dispatched.
  * 
+ * export const Colors = connect(
+ *      mapStateToProps,
+ *      mapDispatchToProps
+ * )(ColorList)
+ * 
  */
-
-export const Colors = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(ColorList)
 
 
 // All of our containers can be created using the React Redux connect function in a single file.
