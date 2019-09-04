@@ -15,8 +15,8 @@ export const Home = () => (
     <div className="home">
         <h1>[Company Website]</h1>
         <nav>
-            <link to="about">[About]</link>
-            <link to="events">[Events]</link>
+            <Link to="about">[About]</Link>
+            <Link to="events">[Events]</Link>
             <Link to="products">[Products]</Link>
             <Link to="contact">[Contact Us]</Link>
         </nav>
