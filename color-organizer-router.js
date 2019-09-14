@@ -34,12 +34,12 @@ export const getFirstArrayItem = array => array[0];
 
 
 export const filterArrayById = (array, id) =>
-    array.filter(item => item.id === id)
+  array.filter(item => item.id === id)
 
 
 export const findById = compose(
-    getFirstArrayItem, 
-    filterArrayById
+  getFirstArrayItem,
+  filterArrayById
 )
 
 
@@ -75,39 +75,39 @@ const UniqueIDHeader = ({ match }) => <h1>{match.params.id}</h1>
 // will be rendered when the user selects a single color.
 
 const ColorDetails = ({ title, color }) => (
-    /**
-     * The ColorDetails component is a presentation component.
-     * It expects properties for the color’s details. 
-     * Since we are using Redux, 
-     * we will need to add a new container that can find the
-     * selected color in state using a routing parameter.
-     */
-    <div className="color-details" style={{backgroundColor: color}}>
-        <h1>{title}</h1>
-        <h1>{color}</h1>
-    </div>
+  /**
+   * The ColorDetails component is a presentation component.
+   * It expects properties for the color’s details. 
+   * Since we are using Redux, 
+   * we will need to add a new container that can find the
+   * selected color in state using a routing parameter.
+   */
+  <div className="color-details" style={{ backgroundColor: color }}>
+    <h1>{title}</h1>
+    <h1>{color}</h1>
+  </div>
 );
 
 
 export const Color = connect(
-    /**
-     * The Color container is created using the connect HOC.
-     * The first argument is a function that is used to set the 
-     * properties of the ColorDetails based on a single color from state.
-     * 
-     * Using the findById function that we defined earlier in this section,
-     * we will locate an individual color object in state with an id parameter that 
-     * is obtained from the URL.
-     * 
-     * The connect HOC will map the data from the 
-     * located color object to the properties of the ColorDetails component.
-     * The connect HOC also maps any properties sent to the Color container to 
-     * the ColorDetails component.
-     * 
-     * This means that all of the router properties will be 
-     * passed to ColorDetails as well. 
-     */  
-    (state, props) => findById(state.colors, props.match.params.id)
+  /**
+   * The Color container is created using the connect HOC.
+   * The first argument is a function that is used to set the 
+   * properties of the ColorDetails based on a single color from state.
+   * 
+   * Using the findById function that we defined earlier in this section,
+   * we will locate an individual color object in state with an id parameter that 
+   * is obtained from the URL.
+   * 
+   * The connect HOC will map the data from the 
+   * located color object to the properties of the ColorDetails component.
+   * The connect HOC also maps any properties sent to the Color container to 
+   * the ColorDetails component.
+   * 
+   * This means that all of the router properties will be 
+   * passed to ColorDetails as well. 
+   */
+  (state, props) => findById(state.colors, props.match.params.id)
 )(ColorDetails)
 
 
@@ -116,29 +116,29 @@ export const Color = connect(
 
 
 const ColorDetails = ({ title, color, history }) => (
-    // When users click the div.color-details element, 
-    // the history.goBack() method will be invoked. 
-    // The user will be navigated back to the previous location.
-    // Now that we have a Color container, we need to add it to our app.    
-    <div className="color-details" style={{backgroundColor: color}}
-        onClick={() => history.goBack()}>
-        <h1>{title}</h1>
-        <h1>{color}</h1>
-    </div>
+  // When users click the div.color-details element, 
+  // the history.goBack() method will be invoked. 
+  // The user will be navigated back to the previous location.
+  // Now that we have a Color container, we need to add it to our app.    
+  <div className="color-details" style={{ backgroundColor: color }}
+    onClick={() => history.goBack()}>
+    <h1>{title}</h1>
+    <h1>{color}</h1>
+  </div>
 );
 
- 
+
 // First, we will need to wrap the App component with a HashRouter when it is initially rendered.
 
 import { HashRouter } from 'react-router-dom';
 
 // Other...
 render(
-    <Provider store={store}>
-        <HashRouter>
-            <App />
-        </HashRouter>
-    </Provider>, document.getElementById('react-container')
+  <Provider store={store}>
+    <HashRouter>
+      <App />
+    </HashRouter>
+  </Provider>, document.getElementById('react-container')
 );
 
 
@@ -152,27 +152,27 @@ import '../stylesheets/APP.scss';
 
 
 const App = () => (
-    // The Switch component is used to render one of two routes: 
-    // an individual color, or the main app components. 
-    // The first Route renders the Color component when an id is passed in a URL. 
-    // For instance, this route will match when the location is:
-    // http://localhost:3000/#/58d9caee-6ea6-4d7b-9984-65b145031979
-    // Any other location will match / and display the main application components. 
-    // The second Route groups several components under 
-    // a new anonymous stateless functional component. 
-    // As a result, users will either see an individual color or 
-    // a list of colors, depending upon the URL.    
+  // The Switch component is used to render one of two routes: 
+  // an individual color, or the main app components. 
+  // The first Route renders the Color component when an id is passed in a URL. 
+  // For instance, this route will match when the location is:
+  // http://localhost:3000/#/58d9caee-6ea6-4d7b-9984-65b145031979
+  // Any other location will match / and display the main application components. 
+  // The second Route groups several components under 
+  // a new anonymous stateless functional component. 
+  // As a result, users will either see an individual color or 
+  // a list of colors, depending upon the URL.    
 
-    <Switch>
-        <Route exact path="/:id" component={Color} />
-        <Route path="/" component={() => (
-            <div className="app">
-                <Menu />
-                <NewColor />
-                <Colors />
-            </div>
-        )} />
-    </Switch>
+  <Switch>
+    <Route exact path="/:id" component={Color} />
+    <Route path="/" component={() => (
+      <div className="app">
+        <Menu />
+        <NewColor />
+        <Colors />
+      </div>
+    )} />
+  </Switch>
 );
 
 export default App;
@@ -201,31 +201,31 @@ import { withRouter } from 'react-router';
 
 // Other
 class Color extends Component {
-    // Navigation is obtained by using the history object directly. 
-    // When a user clicks the color title or the color itself, 
-    // a new route is pushed into the history object. 
-    // This new route is a string that contains the color’s id. 
-    // Pushing this route into history will cause the navigation to occur.
-    render() {
-        const { id, title, color, rating, timestamp, onRemove, onRate, history } = this.props
-        return (
-            <section className="color" style={this.style}>
-                <h1 ref="title" onClick={() => history.push(`/${id}`)}>
-                    {title}
-                </h1>
-                <button onClick={onRemove}>
-                    <FaTrash />
-                </button>
-                <div className="color" onClick={() => history.push(`/${id}`)} 
-                    style={{ backgroundColor: color }}>
-                </div>
-                <TimeAgo timestamp={timestamp} />
-                <div>
-                    <StarRating starsSelected={rating} onRate={onRate}/>
-                </div>
-            </section>
-        )
-    }
+  // Navigation is obtained by using the history object directly. 
+  // When a user clicks the color title or the color itself, 
+  // a new route is pushed into the history object. 
+  // This new route is a string that contains the color’s id. 
+  // Pushing this route into history will cause the navigation to occur.
+  render() {
+    const { id, title, color, rating, timestamp, onRemove, onRate, history } = this.props
+    return (
+      <section className="color" style={this.style}>
+        <h1 ref="title" onClick={() => history.push(`/${id}`)}>
+          {title}
+        </h1>
+        <button onClick={onRemove}>
+          <FaTrash />
+        </button>
+        <div className="color" onClick={() => history.push(`/${id}`)}
+          style={{ backgroundColor: color }}>
+        </div>
+        <TimeAgo timestamp={timestamp} />
+        <div>
+          <StarRating starsSelected={rating} onRate={onRate} />
+        </div>
+      </section>
+    )
+  }
 };
 
 // withRouter() is an HOC.
@@ -289,15 +289,15 @@ export default withRouter(Color);
  */
 
 export const Colors = connect(
-    ({colors}, {match}) => ({ 
-        colors: sortColors(colors, match.params.sort) 
-    }),
-    dispatch => ({
-        onRemove(id) { dispatch(removeColor(id)) },
-        onRate(id, rating) { dispatch(rateColor(id, rating)) }
-    })
-    // Now the colors are being sorted via a routing parameter before 
-    // they are passed to the ColorList as a property.
+  ({ colors }, { match }) => ({
+    colors: sortColors(colors, match.params.sort)
+  }),
+  dispatch => ({
+    onRemove(id) { dispatch(removeColor(id)) },
+    onRate(id, rating) { dispatch(rateColor(id, rating)) }
+  })
+  // Now the colors are being sorted via a routing parameter before 
+  // they are passed to the ColorList as a property.
 )(ColorList)
 
 
@@ -313,17 +313,17 @@ import { NavLink } from 'react-router-dom';
 const selectedStyle = { color: 'red' };
 
 const Menu = ({ match }) => (
-    <nav className="menu">
-        <NavLink to="/" style={match.isExact && selectedStyle}>
-            date
+  <nav className="menu">
+    <NavLink to="/" style={match.isExact && selectedStyle}>
+      date
         </NavLink>
-        <NavLink to="/sort/title" activeStyle={selectedStyle}>
-            title
+    <NavLink to="/sort/title" activeStyle={selectedStyle}>
+      title
         </NavLink>
-        <NavLink to="/sort/rating" activeStyle={selectedStyle}>
-            rating
+    <NavLink to="/sort/rating" activeStyle={selectedStyle}>
+      rating
         </NavLink>
-    </nav>
+  </nav>
 );
 
 export default Menu;
@@ -337,40 +337,40 @@ export default Menu;
 
 
 const App = () => (
-    /**
-     * First, the Menu needs the match property, so we render the Menu with a Route. 
-     * The Menu will always render alongside the NewColor form and 
-     * the list of colors because the Route does not have a path.
-     * 
-     * After the NewColor component, we want to display either the default list of colors,
-     * sorted by default, or the list of colors sorted by a parameter. 
-     * These routes are wrapped in the Switch component to ensure that 
-     * we only render one Colors container.
-     * 
-     * When users navigate to the home route, http://localhost:3000, 
-     * the App component is rendered. 
-     * By default, the Colors container is rendered within the App. 
-     * The value of the sort parameter is undefined, so the colors are sorted by default.
-     * 
-     * If the user navigates to http://localhost:3000/sort/rating, 
-     * the Colors container will also be rendered, 
-     * but this time the sort parameter should have a value, 
-     * and the colors should be sorted by that value. 
-     */
-    
-    <Switch>
-        <Route exact path="/:id" component={Color} />
-        <Route path="/"component={() => (
-            <div className="app">
-                <Route component={Menu} />
-                <NewColor />
-                <Switch>
-                    <Route exact path="/" component={Colors} />
-                    <Route path="/sort/:sort" component={Colors} />
-                </Switch>
-            </div>
-        )} />
-    </Switch>
+  /**
+   * First, the Menu needs the match property, so we render the Menu with a Route. 
+   * The Menu will always render alongside the NewColor form and 
+   * the list of colors because the Route does not have a path.
+   * 
+   * After the NewColor component, we want to display either the default list of colors,
+   * sorted by default, or the list of colors sorted by a parameter. 
+   * These routes are wrapped in the Switch component to ensure that 
+   * we only render one Colors container.
+   * 
+   * When users navigate to the home route, http://localhost:3000, 
+   * the App component is rendered. 
+   * By default, the Colors container is rendered within the App. 
+   * The value of the sort parameter is undefined, so the colors are sorted by default.
+   * 
+   * If the user navigates to http://localhost:3000/sort/rating, 
+   * the Colors container will also be rendered, 
+   * but this time the sort parameter should have a value, 
+   * and the colors should be sorted by that value. 
+   */
+
+  <Switch>
+    <Route exact path="/:id" component={Color} />
+    <Route path="/" component={() => (
+      <div className="app">
+        <Route component={Menu} />
+        <NewColor />
+        <Switch>
+          <Route exact path="/" component={Colors} />
+          <Route path="/sort/:sort" component={Colors} />
+        </Switch>
+      </div>
+    )} />
+  </Switch>
 );
 
 
