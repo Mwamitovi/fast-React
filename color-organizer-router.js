@@ -71,6 +71,8 @@ const UniqueIDHeader = ({ match }) => <h1>{match.params.id}</h1>
 // We can create parameters any time we want to collect data from the URL. 
 
 
+// Refer to branch: feature/react-redux to understand changes in state managing here
+
 // Lets create a ColorDetails component that 
 // will be rendered when the user selects a single color.
 
