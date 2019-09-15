@@ -1,20 +1,22 @@
 import React from 'react'
-import { render } from 'react-dom'
+import { hydrate } from 'react-dom'
 import { Provider } from 'react-redux'
-import { HashRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router-dom'
 import App from './components/App'
 import storeFactory from './store'
 
-const store = storeFactory()
+const store = storeFactory(false, window.__INITIAL_STATE__)
 
 window.React = React
 window.store = store
 
-render(
-    <Provider store={store}>
-        <HashRouter>
-          <App />
-        </HashRouter>
-    </Provider>,
-    document.getElementById('react-container')
+console.log('renderd from here...')
+
+hydrate(
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById('react-container')
 )
