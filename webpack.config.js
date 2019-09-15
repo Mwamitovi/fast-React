@@ -1,23 +1,19 @@
 var webpack = require("webpack");
+var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 var path = require("path");
 
 process.noDeprecation = true
 
 module.exports = {
-  entry: "./color-organizer-router/src/index.js",
+  entry: "./color-organizer/src/index.js",
   output: {
-    path: path.join(__dirname, 'color-organizer-router/dist', 'assets'),
+    path: path.join(__dirname, 'color-organizer/dist/', 'assets'),
     filename: "bundle.js",
     publicPath: "assets",
     sourceMapFilename: 'bundle.map'
   },
   devtool: '#source-map',
-  devServer: {
-    inline: true,
-    contentBase: './color-organizer-router/dist',
-    port: 3000
-  },
   module: {
     rules: [
       {
@@ -30,25 +26,34 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader', {
-          loader: 'postcss-loader',
-          options: {
-            plugins: () => [require('autoprefixer')]
-          }
-        }]
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['style-loader', 'css-loader', {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [require('autoprefixer')]
+            }
+          }]
+        })        
       },
       {
         test: /\.scss/,
-        use: ['style-loader', 'css-loader', {
-          loader: 'postcss-loader',
-          options: {
-            plugins: () => [require('autoprefixer')]
-          }
-        }, 'sass-loader']
+        loader: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: ['css-loader', {
+            loader: 'postcss-loader',
+            options: {
+              plugins: () => [require('autoprefixer')]
+            }
+          }, 'sass-loader']
+        })        
       }
     ]
   },
   plugins: [
+    new ExtractTextPlugin(
+      "bundle.css"
+    ),
     new webpack.DefinePlugin({
       "process.env": {
         //   NODE_ENV: JSON.stringify("production")
