@@ -1,12 +1,15 @@
 {
-  "name": "recipe-app",
+  "name": "recipe-app-and-color-organizer",
   "version": "2.0.0",
-  "description": "A sample isomorphic react application",
+  "description": "A sample isomorphic React application",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --progress --config recipe.webpack.config.js",
-    "prestart": "npm run build",
-    "start": "babel-node server-render-recipes/index-server.js"
+    "build-color": "webpack --progress",
+    "prestart-color": "npm run build-color",
+    "start-color": "babel-node color-organizer/src/server",
+    "build-recipe": "webpack --progress --config recipe.webpack.config.js",
+    "prestart-recipe": "npm run build-recipe",
+    "start-recipe": "babel-node server-render-recipes/index-server.js"
   },
   "repository": {
     "type": "git",
@@ -27,24 +30,36 @@
   },
   "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/server#readme",
   "dependencies": {
-    "body-parser": "1.18.2",
-    "express": "4.15.5",
+    "httpster": "1.0.3",
     "prop-types": "15.6.0",
     "react": "16.9.0",
     "react-dom": "16.9.0",
+    "redux": "3.7.2",
+    "redux-thunk": "2.2.0",
     "react-icons": "2.2.7",
     "react-redux": "6.0.1",
+    "uuid": "3.3.2",
     "react-router-dom": "5.0.1",
-    "redux": "3.7.2",
-    "uuid": "3.3.2"
+    "body-parser": "1.18.2",
+    "express": "4.15.5",
+    "ignore-styles": "5.0.1",
+    "isomorphic-fetch": "2.2.1"
   },
   "devDependencies": {
-    "babel-cli": "6.26.0",
+    "babel-cli": "^6.26.0",
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
     "babel-preset-env": "1.6.0",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
-    "webpack": "3.6.0"
+    "css-loader": "0.28.7",
+    "extract-text-webpack-plugin": "3.0.0",
+    "node-sass": "4.9.4",
+    "optimize-css-assets-webpack-plugin": "3.2.0",
+    "postcss-loader": "2.0.6",
+    "sass-loader": "6.0.6",
+    "style-loader": "0.18.2",
+    "webpack": "3.6.0",
+    "webpack-dev-server": "2.7.1"
   }
 }
