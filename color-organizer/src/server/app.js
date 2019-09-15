@@ -1,10 +1,24 @@
 import express from 'express'
 import path from 'path'
 import fs from 'fs'
+import storeFactory from '../store'
+import initialState from '../../data/initialState.json'
 
 const fileAssets = express.static(
   path.join(__dirname, '../../dist/assets')
 )
+
+const serverStore = storeFactory(true, initialState)
+
+serverStore.subscribe(
+  () => fs.writeFile(
+    path.join(__dirname, '../../data/initialState.json'),
+    JSON.stringify(serverStore.getState()), 
+    error => (error) ?
+      console.log("Error saving state!", error) :
+      null
+    )
+  )
 
 const logger = (req, res, next) => {
   console.log(`${req.method} request for '${req.url}'`)
