@@ -382,3 +382,366 @@ const buildHTMLPage = ({ html, state, css }) => (`
 // Initially, the color organizer is rendered on the server, 
 // but it is also rendered on the browser after the page is finished loading. 
 // When the browser takes over, the color organizer behaves as a single-page application.
+
+
+// Communicating with the Server
+
+
+/**
+ * At present, the color organizer is rendering UI on 
+ * the server and re-rendering UI in the browser. 
+ * Once the browser takes over, the organizer functions as a single-page application. 
+ * Users dispatch actions locally, the local state changes, and locally the UI is updated. 
+ * 
+ * Everything is working well in the browser, 
+ * but the dispatched actions are not making it back to the server.
+ * 
+ * In this next section, we will not only make sure that this data gets saved on the server,
+ * we will make sure that the action objects themselves are created on the server and
+ * dispatched to both stores.
+ */
+
+
+// Completing Actions on the Server
+
+
+// In the color organizer, we will integrate a REST API for handling our data. 
+// Actions will be initiated on the client, completed on the server, and then dispatched to both stores. 
+// The serverStore will save the new state to JSON, and the client store will trigger a UI update. 
+// Both stores will dispatch the same actions universally.
+
+// Let’s take a look at an example of the complete process for 
+// dispatching an ADD_COLOR action in the proposed solution.
+// (see- color-organizer/create-universal-action.png)
+
+// 1. Dispatch action creator addColor() with new title and color.
+// 2. Send data to server in new POST request.
+// 3. Create and dispatch the new ADD_COLOR add color action on the server.
+// 4. Send the ADD_COLOR action in the response body.
+// 5. Parse the response body and dispatch the ADD_COLOR action on the client.
+
+// 1
+
+// The first thing that we need to do is build the REST API. 
+// Let’s create a new file called ./src/server/color-api.js.
+
+// Every action created is handled the same way: 
+// it is dispatched on the server and then it is sent to the client. 
+
+// Let’s create a function that dispatches the action to the serverStore and 
+// sends the action to the client using the response object:
+
+const dispatchAndRespond = (req, res, action) => {
+  req.store.dispatch(action)
+  res.status(200).json(action)
+}
+
+// Once we have an action, 
+// we can use this function to dispatch the action and send a response to the client.
+// We will need to create some HTTP endpoints using the Express Router that 
+// can handle various HTTP requests. 
+// We will create routes to handle GET, POST, PUT, and DELETE requests on the route /api/colors. 
+// The Express Router can be used to create these routes. 
+// Each route will contain the logic to create a different action object and
+// send it to the dispatchAndRespond function along with the request and response objects.
+
+// Each function added to the router object handles 
+// a different request for http://localhost:3000/api/{route}:
+
+// GET '/colors'
+// Responds with the current color array from the server’s state. 
+// This route is added just so we can see the listed colors; 
+// it is not used by the frontend.
+
+// POST '/colors'
+// Creates a new color action object and sends it to dispatchAndRespond.
+
+// PUT '/color/:id'
+// Changes the rating of a color. 
+// The color’s ID is obtained from route paramaters and used in the new action object.
+
+// DELETE '/color/:id'
+// Removes a color based upon the ID sent in the routing parameters.
+
+// 2
+
+// Now that we have defined the routes, 
+// we need to add them to the Express app configuration.
+
+// First, we install the Express body-parser:
+// npm install body-parser --save
+
+// The body-parser is used to parse incoming request bodies and 
+// obtain any variables sent to the routes. 
+// It is necessary to obtain the new color and rating information from the client.
+
+// 3
+
+// We’ll need to add this middleware to our Express app configuration. 
+// Let’s import the body-parser and our new routes into the ./server/app.js file.
+
+// Let’s add the bodyParser middleware and the API to our Express app. 
+// It is important to add the bodyParser before the API so 
+// that the data can be parsed by the time the request has been handled by the API.
+
+export default express()
+  .use(logger)
+  .use(fileAssets)
+  .use(bodyParser.json())
+  .use(addStoreToRequestPipeline)
+  .use('/api', api)
+  .use(matchRoutes)
+
+// The bodyParser.json() is now parsing incoming request bodies that have been formatted as JSON. 
+// Our color-api is added to the pipeline and 
+// configured to respond to any routes that are prefixed with /api. 
+// For example, this URL can be used to obtain the current array of colors as JSON: 
+// http://localhost:3000/api/colors.
+
+// Now that our Express app has endpoints that can respond to HTTP requests, 
+// we are ready to modify the frontend action creators to communicate with these endpoints.
+
+// 7
+
+// Actions with Redux Thunks
+
+// One problem with client/server communication is latency, 
+// or the delay that we experience while waiting for a response after sending a request. 
+// Our action creators need to wait for a response before they can dispatch the action, 
+// because in our solution the action itself is being sent to the client from the server. 
+
+// There is middleware for Redux that can help us with asynchronous actions: it is called redux-thunk.
+// In this next section, we will rewrite out action creators using redux-thunk. 
+// These action creators, called thunks, will allow us to wait for 
+// a server response before dispatching an action locally. 
+
+// Thunks are higher-order functions. 
+// Instead of action objects, they return other functions. 
+
+// Let’s install redux-thunk:
+// npm install redux-thunk --save
+
+// redux-thunk is middleware; it needs to be incorporated into our storeFactory. 
+// First, at the top of ./src/store/index.js, import redux-thunk:
+// import thunk from 'redux-thunk'
+
+// The storeFactory has a function called middleware. 
+// It returns the middleware that should be incorporated to the new store in a single array. 
+// We can add any Redux middleware to this array. 
+// Each item will be spread into the arguments of the applyMiddle ware function:
+
+const middleware = server => [
+  (server) ? serverLogger : clientLogger,
+  thunk
+]
+
+const storeFactory = (server=false, initialState={}) =>
+  applyMiddleware(...middleware(server))(createStore)(
+    combineReducers({ colors }),
+      initialState
+  )
+
+export default storeFactory;
+
+// Let’s take a look at the current action creator for adding colors:
+
+export const addColor = (title, color) =>
+  ({
+    type: "ADD_COLOR",
+    id: v4(),
+    title,
+    color,
+    timestamp: new Date().toString()
+  })
+
+// ...
+store.dispatch(addColor("jet", "#000000"))
+
+// This action creator returns an object, the addColor action. 
+// That object is immediately dispatched to the store. 
+// Now let’s look at the thunk version of addColor:
+
+export const addColor = (title, color) =>
+  (dispatch, getState) => {
+    setTimeout(() =>
+      dispatch({
+        type: "ADD_COLOR",
+        index: getState().colors.length + 1,
+        timestamp: new Date().toString(),
+        title,
+        color
+      }),
+      2000
+    )
+  }
+// ...
+store.dispatch(addColor("jet", "#000000"))
+
+// Even though both action creators are dispatched the exact same way, 
+// the thunk returns a function instead of an action. 
+// The returned function is a callback that 
+// receives the store’s dispatch and getState methods as arguments. 
+// We can dispatch an action when we are ready. 
+
+// In this example, a setTimeout is used to create a twosecond delay before we dispatch a new color action.
+// In addition to dispatch, thunks also have access to the store’s getState method. 
+// In this example, we used it to create an index field based upon the current number of colors in state. 
+// This function can be useful when it is time to create actions that depend upon data from the store.
+
+// Not all of your action creators have to be thunks. 
+// The redux-thunk middleware knows the difference between thunks and action objects. 
+// Action objects are immediately dispatched.
+
+// Thunks have another benefit. 
+// They can invoke dispatch or getState asynchronously as many times as they like, 
+// and they are not limited to dispatching one type of action.
+
+
+// In this next sample, the thunk immediately dispatches a RANDOM_RATING_STARTED action and 
+// repeatedly dispatches a RATE_COLOR action that rates a specific color at random:
+
+export const rateColor = id =>
+  (dispatch, getState) => {
+    dispatch({ type: "RANDOM_RATING_STARTED" })
+    setInterval(() =>
+      dispatch({
+        type: "RATE_COLOR",
+        id,
+        rating: Math.floor(Math.random()*5)
+      }),
+      1000
+    )
+  }
+// ...
+store.dispatch(
+  rateColor("f9005b4e-975e-433d-a646-79df172e1dbb")
+)
+
+// These thunks are simply samples. 
+// Let’s build the real thunks that the color organizer will use by replacing our current action creators.
+
+// First, we’ll create a function called fetchThenDispatch. 
+// This function uses isomorphic-fetch to send a request to a web service and 
+// automatically dispatch the response.
+
+import fetch from 'isomorphic-fetch'
+
+const parseResponse = response => response.json()
+
+const logError = error => console.error(error)
+
+const fetchThenDispatch = (dispatch, url, method, body) =>
+  fetch(url, { method, body, headers: { 'Content-Type': 'application/json' } })
+    .then(parseResponse)
+    .then(dispatch)
+    .catch(logError)
+
+// The fetchThenDispatch function requires 
+// the dispatch function, a URL, the HTTP request method, and the HTTP request body as arguments. 
+// This information is then used in the fetch function. 
+// Once a response is received, it will be parsed and then dispatched. 
+// Any errors will be logged to the console.
+
+// We’ll use the fetchThenDispatch function to help us construct thunks. 
+// Each thunk will send a request to our API, along with any necessary data. 
+// Since our API responds with action objects, 
+// the response can be immediately parsed and dispatched.
+
+// The addColor thunk sends a POST request to
+// http://localhost:3000/api/colors along with the title and hex value of the new color. 
+// An ADD_COLOR action object is returned, parsed, and dispatched.
+
+// The removeColor thunk sends a DELETE request to 
+// the API with the ID of the color to delete provided in the URL. 
+// A REMOVE_COLOR action object is returned, parsed, and dispatched.
+
+// The rateColor thunk sends a PUT request to the API. 
+// The ID of the color to rate is included in the URL as a route parameter, 
+// and the new rating is supplied in the body of the request. 
+// A RATE_COLOR action object is returned from the server, 
+// parsed as JSON, and dispatched to the local store.
+
+
+// Now when you run the application, 
+// you can see actions being dispatched to both stores in the console log. 
+// The browser console is a part of the developer tools and 
+// the server console is the terminal where the server was started.
+
+
+// Using Thunks with Websockets
+
+// The color organizer uses REST to communicate with the server. 
+// Thunks can also be used with websockets to send and receive.
+// Websockets are two-way connections between the client and the server. 
+// Websockets can send data to a server, but they also allow the server to send data to the client.
+
+// One way to work with websockets and thunks is to dispatch a connect action creator.
+// For example, let’s say we wanted to connect to a message server:
+store.dispatch(connectToMessageSocket())
+
+// Thunks can invoke dispatch as much as they want. 
+// We can create thunks that listen for incoming messages and 
+// dispatch NEW_MESSAGE actions when they are received.
+// This next sample uses socket.io-client to connect to a socket.io server and 
+// listen for incoming messages.
+
+import io from 'socket.io-client'
+
+const connectToChatSocket = () => dispatch => {
+  dispatch({type: "CONNECTING"})
+
+  let socket = io('/message-socket')
+
+  socket.on('connect', () =>
+    dispatch({type: "CONNECTED", id: socket.id})
+  )
+  socket.on('message', (message, user) =>
+    dispatch({type: "NEW_MESSAGE", message, user})
+  )
+}
+
+export default connectToMessageSocket;
+
+// As soon as the connectToChatSocket is invoked, a CONNECTING action is dispatched.
+// We then attempt to connect to the message socket. 
+// Once connected, the socket will respond with a connect event. 
+// When this happens, we can dispatch a CONNECTED action with information about the current socket.
+// When the server sends new messages, message events are raised on the socket. 
+// We can dispatch NEW_MESSAGE actions locally every time they are sent to this client from the server.
+// Thunks can work with any type of asynchronous process, including websockets,
+// socket-io, Firebase, setTimeouts, transitions, and animations.
+
+// Just about every React application that you build will 
+// require the existence of some type of web server. 
+// Sometimes you will only need a web server to host your application.
+
+// Other situations require communications with web services. 
+// And then there are high-traffic applications that need to work on many platforms that 
+// will require different solutions entirely.
+
+
+// Advanced Data Fetching
+
+/**
+ * If you are working on high-traffic applications that share data on multiple platforms,
+ * you may want to look into frameworks like Relay and GraphQL or Falcor. 
+ * These frameworks provide more efficient and 
+ * intelligent solutions for providing applications with only the data that they require.
+ * 
+ * GraphQL is a declarative data querying solution developed at Facebook that 
+ * can be used to query data from multiple sources. 
+ * GraphQL can be used by all types of languages and platforms. 
+ * 
+ * Relay is a library, also developed at Facebook, 
+ * that handles data fetching for client applications by 
+ * linking GraphQL queries with React or React Native components. 
+ * 
+ * There is a bit of learning curve associated with GraphQL and Relay, 
+ * but it is well worth it if you really like declarative programming.
+ * 
+ * Falcor is a framework developed at Netflix that 
+ * also addresses issues associated with fetching and efficiently using data. 
+ * Like GraphQL, Falcor allows you to query data from multiple services in a single location. 
+ * However, Falcor uses JavaScript to query data, 
+ * which likely means less of a learning curve for JavaScript developers.
+ */
