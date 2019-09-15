@@ -1,22 +1,21 @@
 {
-  "name": "react-router",
-  "version": "4.2.0",
-  "description": "Add routing functionality to react app",
+  "name": "recipe-app",
+  "version": "2.0.0",
+  "description": "A sample isomorphic react application",
   "main": "index.js",
   "scripts": {
-    "start-site": "opener http://localhost:3000 & webpack-dev-server --config ./site.webpack.config.js",
-    "start-color": "opener http://localhost:3000 & webpack-dev-server --config ./webpack.config.js"
+    "build": "webpack --progress --config recipe.webpack.config.js",
+    "prestart": "npm run build",
+    "start": "babel-node index-server.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/react-router"
+    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/server"
   },
   "keywords": [
     "React",
-    "redux",
     "state",
     "setState",
-    "storeFactory",
     "explicitly",
     "passing",
     "props"
@@ -26,9 +25,10 @@
   "bugs": {
     "url": "https://github.com/MwamiTovi/fast-React/issues"
   },
-  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/react-router#readme",
+  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/server#readme",
   "dependencies": {
-    "httpster": "1.0.3",
+    "body-parser": "1.18.2",
+    "express": "4.15.5",
     "prop-types": "15.6.0",
     "react": "16.9.0",
     "react-dom": "16.9.0",
@@ -39,6 +39,7 @@
     "uuid": "3.3.2"
   },
   "devDependencies": {
+    "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
     "babel-preset-env": "1.6.0",
@@ -50,8 +51,6 @@
     "postcss-loader": "2.0.6",
     "sass-loader": "6.0.6",
     "style-loader": "0.18.2",
-    "webpack": "3.6.0",
-    "optimize-css-assets-webpack-plugin": "3.2.0",
-    "webpack-dev-server": "2.7.1"
+    "webpack": "3.6.0"
   }
 }
