@@ -1,5 +1,5 @@
 /**
- * Color Organizer (with a server)
+ * Recipes app (with a server)
  * See branch: feature/server (detailed)
  * 
  */
