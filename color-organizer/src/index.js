@@ -10,7 +10,7 @@ const store = storeFactory(false, window.__INITIAL_STATE__)
 window.React = React
 window.store = store
 
-console.log('renderd from here...')
+console.log('rendered from here...')
 
 hydrate(
   <Provider store={store}>
