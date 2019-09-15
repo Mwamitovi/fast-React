@@ -7,5 +7,5 @@ global.React = React
 app.set('port', process.env.PORT || 3000)
   .listen(
     app.get('port'),
-    () => console.log('Color Organizer running')
+    () => console.log(`Color Organizer running at 'http://localhost:${app.get('port')}'`)
   )
