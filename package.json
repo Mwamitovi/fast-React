@@ -6,7 +6,7 @@
   "scripts": {
     "build": "webpack --progress --config recipe.webpack.config.js",
     "prestart": "npm run build",
-    "start": "babel-node index-server.js"
+    "start": "babel-node server-render-recipes/index-server.js"
   },
   "repository": {
     "type": "git",
@@ -45,12 +45,6 @@
     "babel-preset-env": "1.6.0",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
-    "css-loader": "0.28.7",
-    "node-sass": "^4.9.4",
-    "opener": "1.4.3",
-    "postcss-loader": "2.0.6",
-    "sass-loader": "6.0.6",
-    "style-loader": "0.18.2",
     "webpack": "3.6.0"
   }
 }
