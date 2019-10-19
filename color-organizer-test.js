@@ -510,8 +510,91 @@ Our tests still pass because we are not making sure that our state object is imm
     and deep-freezing them will cause an error if any code does try to mutate these objects:
 */}
 
-{/* Let’s change the color reducer so that this test will pass. We will use the spread operator
-to make a copy of the state object before we overwrite the rating: */}
+import C from '../../../src/constants'
+import { color } from '../../../src/store/reducers'
+import DeepFreeze from 'deep-freeze'
+
+/* eslint-disable no-undef */
+
+describe('color Reducer', () => {
+
+  it('ADD_COLOR success', () => {
+    const state = {}
+    const action = {
+      type: C.ADD_COLOR,
+      id: 0,
+      title: 'Test Teal',
+      color: '#90C3D4',
+      timestamp: new Date().toString()
+    }
+    DeepFreeze(state)
+    DeepFreeze(action)
+    const results = color(state, action)
+    expect(results)
+      .toEqual({
+        id: 0,
+        title: 'Test Teal',
+        color: '#90C3D4',
+        timestamp: action.timestamp,
+        rating: 0
+      })
+  })
+
+  it('RATE_COLOR success', () => {
+    const state = {
+      id: 0,
+      title: 'Test Teal',
+      color: '#90C3D4',
+      timestamp: 'Sat Oct 19 2019 13:32:09 GMT+0300 (EAT)',
+      rating: undefined
+    }
+    const action = {
+      type: C.RATE_COLOR,
+      id: 0,
+      rating: 3
+    }
+    DeepFreeze(state)
+    DeepFreeze(action)
+    const results = color(state, action)
+    expect(results)
+      .toEqual({
+        id: 0,
+        title: 'Test Teal',
+        color: '#90C3D4',
+        timestamp: 'Sat Oct 19 2019 13:32:09 GMT+0300 (EAT)',
+        rating: 3
+      })
+  })
+})
+
+{/* Now we can run our modified test on our current color reducer and watch it fail,
+    because rating a color mutates the incoming state: 
+*/}
+
+C:\virtualenvs\react\fast-react>jest
+ FAIL  color-organizer-test\__tests__\__store__\__reducers__\color.test.js (5.695s)
+  color Reducer
+    √ ADD_COLOR success (20ms)
+    × RATE_COLOR success (3ms)
+
+  ● color Reducer › RATE_COLOR success
+
+    TypeError: Cannot assign to read only property 'rating' of object '#<Object>'
+
+      at color (color-organizer-test/src/store/reducers.js:44:20)
+      at Object.<anonymous> (color-organizer-test/__tests__/__store__/__reducers__/color.test.js:46:39)
+          at new Promise (<anonymous>)
+
+Test Suites: 1 failed, 1 total
+Tests:       1 failed, 1 passed, 2 total
+Snapshots:   0 total
+Time:        11.633s
+Ran all test suites.
+
+{/* Let’s change the color reducer so that this test will pass. 
+    We will use the spread operator to make a copy of the state object before 
+    we overwrite the rating: 
+*/}
 
 case 'RATE_COLOR':
   return {
@@ -520,3 +603,26 @@ case 'RATE_COLOR':
   }
 
 {/* Now that we are not mutating state, both tests should pass: */}
+
+C:\virtualenvs\react\fast-react>jest
+ PASS  color-organizer-test\__tests__\__store__\__reducers__\color.test.js (5.737s)
+  color Reducer
+    √ ADD_COLOR success (21ms)
+    √ RATE_COLOR success (2ms)
+
+Test Suites: 1 passed, 1 total
+Tests:       2 passed, 2 total
+Snapshots:   0 total
+Time:        10.296s
+Ran all test suites.
+
+{/* This process represents a typical TDD cycle. 
+    We wrote the tests first, wrote code to make the tests pass, 
+    and refactored both the code and the tests. 
+    This approach is very effective when working with JavaScript, and especially Redux. 
+*/}
+
+
+{/* Testing the Store */}
+
+
