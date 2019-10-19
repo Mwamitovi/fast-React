@@ -1,12 +1,12 @@
-import { Menu, NewColor, Colors } from './containers';
+import { Menu, NewColor, Colors } from './containers'
 
 
 const App = () => (
-    <div className="app">
-        <Menu />
-        <NewColor />
-        <Colors />
-    </div>
+  <div className="app">
+    <Menu />
+    <NewColor />
+    <Colors />
+  </div>
 )
 
-export default App;
+export default App
