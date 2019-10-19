@@ -35,12 +35,14 @@ export const color = (state={}, action) => {
       // Note that RATE_COLOR action passes an ID that’s not used by the color reducer,
       // because the ID of this action is used to locate the
       // color in an entirely different reducer (colors).
-      return (state.id !== action.id) ?
-        state :
-        {
-          ...state,
-          rating: action.rating
-        }
+      // return (state.id !== action.id) ?
+      //   state :
+      //   {
+      //     ...state,
+      //     rating: action.rating
+      //   }
+      state.rating = action.rating
+      return state
     default:
       // If for some reason the color reducer is invoked with an unrecognized action, 
       // we will return the current state: the default case.
