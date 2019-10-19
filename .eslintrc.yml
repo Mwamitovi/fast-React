@@ -28,8 +28,5 @@ rules:
   semi: 
     - error
     - never
-  linebreak-style: 
-    - error
-    - unix
   no-console: 0
   no-unused-vars: off
