@@ -13,11 +13,11 @@ import C from '../constants'
  */
 
 
-export const color = (state={}, action) => {
+export const color = (state = {}, action) => {
   // The color reducer is a function that 
   // creates a new object or rates an existing one.
   // Note that one action object can impact several reducers.
-  switch(action.type) {
+  switch (action.type) {
     case C.ADD_COLOR:
       // ADD_COLOR returns a new color object constructed 
       // from the action’s payload data.    
@@ -35,14 +35,10 @@ export const color = (state={}, action) => {
       // Note that RATE_COLOR action passes an ID that’s not used by the color reducer,
       // because the ID of this action is used to locate the
       // color in an entirely different reducer (colors).
-      // return (state.id !== action.id) ?
-      //   state :
-      //   {
-      //     ...state,
-      //     rating: action.rating
-      //   }
-      state.rating = action.rating
-      return state
+      return {
+        ...state,
+        rating: action.rating
+      }
     default:
       // If for some reason the color reducer is invoked with an unrecognized action, 
       // we will return the current state: the default case.
@@ -51,10 +47,10 @@ export const color = (state={}, action) => {
 }
 
 
-export const colors = (state=[], action) => {
+export const colors = (state = [], action) => {
   // The colors reducer handles any actions for 
   // adding, rating, and removing colors.   
-  switch(action.type) {
+  switch (action.type) {
     case C.ADD_COLOR:
       // ADD_COLOR, here, 
       // creates a new array by concatenating all of 
@@ -87,11 +83,11 @@ export const colors = (state=[], action) => {
 }
 
 
-export const sort = (state='SORTED_BY_DATE', action) => {
+export const sort = (state = 'SORTED_BY_DATE', action) => {
   // The sort reducer is used to change the sort state variable.
   // It sets the sort state to the value of the action’s sortBy field 
   // (if this is not a state provided, it will return SORTED_BY_DATE).
-  switch(action.type) {
+  switch (action.type) {
     case C.SORT_COLORS:
       return action.sortBy
     default:

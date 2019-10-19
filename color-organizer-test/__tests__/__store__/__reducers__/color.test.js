@@ -1,5 +1,6 @@
 import C from '../../../src/constants'
 import { color } from '../../../src/store/reducers'
+import DeepFreeze from 'deep-freeze'
 
 /* eslint-disable no-undef */
 
@@ -14,6 +15,8 @@ describe('color Reducer', () => {
       color: '#90C3D4',
       timestamp: new Date().toString()
     }
+    DeepFreeze(state)
+    DeepFreeze(action)
     const results = color(state, action)
     expect(results)
       .toEqual({
@@ -38,6 +41,8 @@ describe('color Reducer', () => {
       id: 0,
       rating: 3
     }
+    DeepFreeze(state)
+    DeepFreeze(action)
     const results = color(state, action)
     expect(results)
       .toEqual({
