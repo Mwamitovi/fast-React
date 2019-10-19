@@ -1,16 +1,17 @@
 {
-  "name": "color-organizer-explicit",
+  "name": "color-organizer-test",
   "version": "4.1.0",
-  "description": "A sample Redux store with reducers and action creators",
+  "description": "Testing a React application",
   "main": "index.js",
   "scripts": {
+    "lint": "./node_modules/.bin/eslint .",
     "build": "webpack --progress",
     "prestart": "npm run build",
     "start": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-explicit/dist"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/react-redux"
+    "url": "https://github.com/Mwamitovi/fast-React/tree/feature/tests"
   },
   "keywords": [
     "React",
@@ -27,7 +28,7 @@
   "bugs": {
     "url": "https://github.com/MwamiTovi/fast-React/issues"
   },
-  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/react-redux#readme",
+  "homepage": "https://github.com/Mwamitovi/fast-React/tree/feature/tests#readme",
   "dependencies": {
     "httpster": "1.0.3",
     "prop-types": "15.6.0",
@@ -45,6 +46,8 @@
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-0": "6.24.1",
     "css-loader": "0.28.7",
+    "eslint": "^6.5.1",
+    "eslint-plugin-react": "^7.16.0",
     "node-sass": "^4.9.4",
     "opener": "1.4.3",
     "postcss-loader": "2.0.6",
