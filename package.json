@@ -6,8 +6,13 @@
   "scripts": {
     "lint": "./node_modules/.bin/eslint .",
     "build": "webpack --progress",
+    "posttest": "npm run lint",
     "prestart": "npm run build",
-    "start": "opener http://localhost:3000 & httpster -p 3000 -d ./color-organizer-explicit/dist"
+    "start": "httpster -p 3000 -d ./color-organizer-explicit/dist",
+    "dev": "opener http://localhost:3000 & webpack-dev-server",
+    "test": "jest",
+    "coverage": "opener ./coverage/lcov-report/index.html",
+    "watch:test": "jest --watch"
   },
   "repository": {
     "type": "git",
@@ -56,11 +61,14 @@
     "postcss-loader": "2.0.6",
     "sass-loader": "6.0.6",
     "style-loader": "0.18.2",
-    "webpack": "3.6.0"
+    "webpack": "3.6.0",
+    "webpack-dev-server": "2.7.1"
   },
   "jest": {
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
-    }
+    },
+    "setupFiles": ["./color-organizer-test/__tests__/global.js"],
+    "modulePathIgnorePatterns": ["global.js"]
   }
 }
