@@ -1,18 +1,20 @@
 import express from 'express'
 import path from 'path'
 import fs from 'fs'
-import bodyParser from 'body-parser'
+// import bodyParser from 'body-parser'
 import { Provider } from 'react-redux'
 import { compose } from 'redux'
 import { renderToString } from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom'
-import api from './color-api'
+// import api from './color-api'
 import App from '../components/App'
 import storeFactory from '../store'
 import initialState from '../../data/initialState.json'
 
 const staticCSS = fs.readFileSync(
-  path.join(__dirname, '../../dist/assets/bundle.css')
+  // path.join(__dirname, '../../dist/assets/bundle.css')
+  // used raw css to by-pass build process for css/scss files (ubuntu)
+  path.join(__dirname, '../stylesheets/colorStyles.css')
 )
 
 const fileAssets = express.static(
@@ -25,9 +27,9 @@ serverStore.subscribe(
   () => fs.writeFile(
     path.join(__dirname, '../../data/initialState.json'),
     JSON.stringify(serverStore.getState()),
-    error => (error) ?
-      console.log("Error saving state!", error) :
-      null
+    error => (error)
+      ? console.log('Error saving state!', error)
+      : null
   )
 )
 
@@ -37,7 +39,7 @@ const buildHTMLPage = ({ html, state, css }) => (`
     <head>
       <meta name="viewport" content="minimum-scale=1.0, width=device-width, maximum-scale=1.0, user-scalable=no" />
       <meta charset="utf-8">
-       <title>Universal Color Organizer</title>
+      <title>Universal Color Organizer</title>
       <style>${staticCSS}</style>
     </head>
     <body>
@@ -49,6 +51,7 @@ const buildHTMLPage = ({ html, state, css }) => (`
 `)
 
 const renderComponentsToHTML = ({ url, store }) =>
+// returns the state of the app, and UI rendered to an HTML string
   ({
     state: store.getState(),
     html: renderToString(
@@ -61,6 +64,8 @@ const renderComponentsToHTML = ({ url, store }) =>
   })
 
 const makeClientStoreFrom = store => url =>
+// Higher-Order-Function invoked on every request
+// returns a functions that always has access to the store
   ({
     url,
     store: storeFactory(false, store.getState())
@@ -88,7 +93,8 @@ const addStoreToRequestPipeline = (req, res, next) => {
 export default express()
   .use(logger)
   .use(fileAssets)
-  .use(bodyParser.json())
+  // .use(bodyParser.json())
   .use(addStoreToRequestPipeline)
-  .use('/api', api)
-  .use(matchRoutes)
+  .use(respond)
+  // .use('/api', api)
+  // .use(matchRoutes)
