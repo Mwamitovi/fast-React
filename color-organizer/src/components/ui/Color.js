@@ -4,24 +4,26 @@ import { withRouter } from 'react-router-dom'
 import StarRating from './StarRating'
 import TimeAgo from './TimeAgo'
 import FaTrash from 'react-icons/lib/fa/trash-o'
-import '../../stylesheets/Color.scss'
+// import '../../stylesheets/Color.scss'
 
 class Color extends Component {
-
-  render() {
+  render () {
     const { id, title, color, rating, timestamp, onRemove, onRate, history } = this.props
     return (
-      <section className="color" style={this.style}>
-        <h1 ref="title"
-          onClick={() => history.push(`/${id}`)}>{title}
+      <section className='color' style={this.style}>
+        <h1
+          ref='title'
+          onClick={() => history.push(`/${id}`)}
+        >{title}
         </h1>
         <button onClick={onRemove}>
           <FaTrash />
         </button>
-        <div className="color"
+        <div
+          className='color'
           onClick={() => history.push(`/${id}`)}
-          style={{ backgroundColor: color }}>
-        </div>
+          style={{ backgroundColor: color }}
+        />
         <TimeAgo timestamp={timestamp} />
         <div>
           <StarRating starsSelected={rating} onRate={onRate} />
@@ -29,7 +31,6 @@ class Color extends Component {
       </section>
     )
   }
-
 };
 
 Color.propTypes = {
@@ -38,12 +39,12 @@ Color.propTypes = {
   rating: PropTypes.number,
   onRemove: PropTypes.func,
   onRate: PropTypes.func
-};
+}
 
 Color.defaultProps = {
   rating: 0,
   onRemove: f => f,
   onRate: f => f
-};
+}
 
-export default withRouter(Color);
+export default withRouter(Color)

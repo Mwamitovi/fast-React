@@ -1,0 +1,221 @@
+/* Combined scss files into css, to render within ubuntu */
+
+html, body, div#react-container {
+  height: 100%;
+  min-height: 100%;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: rgba(255, 255, 255, 1);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%);
+}
+
+input {
+  outline: none;
+}
+
+/* APP.scss */
+
+div.app {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+div.whoops-404 {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 99;
+  background-color: red;
+  color: white;
+}
+
+/* AddColorForm.scss */
+
+form.add-color {
+  width: 100%;
+  display: flex;
+}
+
+form.add-color:first-child {
+  flex-grow: 1;
+}
+
+form.add-color input,
+form.add-color button {
+  margin: .5em;
+  padding: .25em;
+  font-size: 1.2em;
+  border-radius: 5px;
+}
+
+form.add-color input[type="color"] {
+  padding: 0;
+  height: +2em;
+}
+
+form.add-color button {
+  background-color: green;
+  color: white;
+  border: none;
+}
+
+/* Color.scss */
+
+section.color {
+  box-shadow: 3px 3px 8px 1px darken(rgba(229, 229, 229, 1), 20%);
+  height: 235px;
+  border: 2px solid rgba(229, 229, 229, 1);
+  border-bottom-color: darken(rgba(229, 229, 229, 1), 40%);
+  border-right-color: darken(rgba(229, 229, 229, 1), 40%);
+  margin: 1em;
+  padding: 0;
+  flex-basis: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+@media screen and (min-width: 700px) {
+  section.color {
+    flex-basis: calc(50% - 2em - 4px);
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  section.color {
+    flex-basis: calc(33.33333% - 2em - 4px);
+  }
+}
+
+@media screen and (min-width: 1600px) {
+  section.color {
+    flex-basis: calc(25% - 2em - 4px);
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  section.color {
+    flex-basis: calc(16.66666% - 2em - 4px);
+  }
+}
+
+section.color h1 {
+  font-family: Verdana, sans-serif;
+  text-align: center;
+  padding: .5em;
+  flex-basis: calc(100% - 1em);
+}
+
+section.color button {
+  position: absolute;
+  top: .5em;
+  right: .5em;
+  flex-basis: calc(12% - 1em);
+  text-align: right;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(229, 229, 229, 1) 100%);
+  padding: .75em;
+  border-radius: .5px;
+}
+
+section.color > div:last-child {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: .5em;
+}
+
+section.color div.color {
+  height: 100px;
+  flex-basis: 100%;
+}
+
+section.color div.time-ago {
+  position: absolute;
+  bottom: .5em;
+  right: .5em;
+  font-family: monospace;
+  color: darken(rgba(229, 229, 229, 1), 40%);
+}
+
+/* ColorDetails.scss */
+
+div.color-details {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+}
+
+div.color-details  h1 {
+  color: white;
+  text-shadow: 2px 2px 7px black;
+  font-size: 2em;
+  margin: .5em;
+}
+
+/* ColorList.scss */
+
+div.color-list {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  overflow: scroll;
+}
+
+/* Menu.scss */
+
+nav {
+  display: flex;
+  justify-content: space-around;
+  background-color: black;
+  color: white;
+}
+
+nav h1 {
+  display: none;
+}
+
+nav a {
+  color: white;
+  font-family: Arial, sans-serif;
+  font-size: 2em;
+  text-decoration: none;
+  padding: .5em;
+}
+
+nav a.selected {
+  color: #900;
+}
+
+/* Star.scss */
+
+div.star {
+  cursor: pointer;
+  height: 25px;
+  width: 25px;
+  margin: 2px;
+  float: left;
+  background-color: darken(rgba(229, 229, 229, 1), 40%);
+  clip-path: polygon(50% 0%, 63% 38%, 100% 38%, 69% 59%, 82% 100%, 50% 75%, 18% 100%, 31% 59%, 0% 38%, 37% 38%);
+}
+
+div.star.selected {
+  background-color: red;
+}
