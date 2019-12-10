@@ -1,16 +1,16 @@
-var webpack = require("webpack");
-var ExtractTextPlugin = require("extract-text-webpack-plugin");
-var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-var path = require("path");
+var webpack = require('webpack')
+var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+var path = require('path')
 
 process.noDeprecation = true
 
 module.exports = {
-  entry: "./color-organizer/src/index.js",
+  entry: './color-organizer/src/index.js',
   output: {
     path: path.join(__dirname, 'color-organizer/dist/', 'assets'),
-    filename: "bundle.js",
-    publicPath: "assets",
+    filename: 'bundle.js',
+    publicPath: 'assets',
     sourceMapFilename: 'bundle.map'
   },
   devtool: '#source-map',
@@ -34,7 +34,7 @@ module.exports = {
               plugins: () => [require('autoprefixer')]
             }
           }]
-        })        
+        })
       },
       {
         test: /\.scss/,
@@ -46,18 +46,18 @@ module.exports = {
               plugins: () => [require('autoprefixer')]
             }
           }, 'sass-loader']
-        })        
+        })
       }
     ]
   },
   plugins: [
     new ExtractTextPlugin(
-      "bundle.css"
+      'bundle.css'
     ),
     new webpack.DefinePlugin({
-      "process.env": {
+      'process.env': {
         //   NODE_ENV: JSON.stringify("production")
-        NODE_ENV: JSON.stringify("development")
+        NODE_ENV: JSON.stringify('development')
       }
     }),
     new webpack.optimize.UglifyJsPlugin({

@@ -4,7 +4,7 @@
   "description": "A sample isomorphic React application",
   "main": "index.js",
   "scripts": {
-    "build-color": "webpack --progress",
+    "build-color": "webpack --progress --config color.webpack.config.js",
     "prestart-color": "npm run build-color",
     "start-color": "babel-node color-organizer/src/server",
     "build-recipe": "webpack --progress --config recipe.webpack.config.js",
