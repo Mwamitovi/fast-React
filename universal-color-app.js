@@ -153,7 +153,7 @@ export default express()
  * Using Redux is a possible solution that may meet requirements for some applications. 
  * However, there are complications associated with forking node processes that 
  * need to be addressed in larger applications. 
- * You can investigate solutions like Firebase and other cloud providers for 
+ * You can investigate solutions like "Firebase" and other cloud providers for 
  * assistance in working with databases that can scale smoothly.
  */
 
@@ -745,3 +745,15 @@ export default connectToMessageSocket;
  * However, Falcor uses JavaScript to query data, 
  * which likely means less of a learning curve for JavaScript developers.
  */
+
+// Error from node.sass, linked to ubuntu 10.04
+// ERROR in 
+// ./node_modules/css-loader!
+// ./node_modules/postcss-loader/lib?{}!
+// ./node_modules/sass-loader/lib/loader.js!
+// ./color-organizer/src/stylesheets/APP.scss
+// Module build failed: 
+// Error: Node Sass does not yet support your current environment: 
+// Linux 64-bit with Unsupported runtime (72)
+// For more information on which environments are supported please see:
+// https://github.com/sass/node-sass/releases/tag/v4.9.4
