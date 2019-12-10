@@ -4,11 +4,12 @@ import Menu from './components/Menu'
 
 window.React = React
 
-alert('bundle loaded, hydrating browser')
+console.alert('bundle loaded, hydrating browser')
 
 hydrate(
+  // eslint-disable-next-line
   <Menu recipes={__DATA__} />,
-  document.getElementById("react-container")
+  document.getElementById('react-container')
 )
 
-alert('render complete')
+console.alert('render complete')

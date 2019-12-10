@@ -1,13 +1,14 @@
-var webpack = require("webpack");
-var path = require("path");
+// eslint-disable-next-line
+var webpack = require('webpack')
+var path = require('path')
 
 process.noDeprecation = true
 
 module.exports = {
-  entry: "./server-render-recipes/index-client.js",
+  entry: './server-render-recipes/index-client.js',
   output: {
     path: path.join(__dirname, 'server-render-recipes', 'assets'),
-    filename: "bundle.js"
+    filename: 'bundle.js'
   },
   module: {
     rules: [

@@ -14,19 +14,19 @@ const logger = (req, res, next) => {
 }
 
 const sendHTMLPage = (req, res) =>
-  res.status(200).send(
-  `<!doctype html>
-    <html>
-      <head>
-        <title>React Recipes App</title>
-      </head>
-      <body>
-        <div id="react-container">${html}</div>
-        <script>window.__DATA__=${JSON.stringify(data)}</script>
-        <script src="bundle.js"></script>
-      </body>
-    </html>`
-  )
+  res.status(200).send(`
+    <!doctype html>
+      <html>
+        <head>
+          <title>React Recipes App</title>
+        </head>
+        <body>
+          <div id="react-container">${html}</div>
+          <script>window.__DATA__=${JSON.stringify(data)}</script>
+          <script src="bundle.js"></script>
+        </body>
+    </html>
+  `)
 
 const app = express()
   .use(logger)
@@ -34,5 +34,5 @@ const app = express()
   .use(sendHTMLPage)
 
 app.listen(3000, () =>
-  console.log(`Recipe app running at 'http://localhost:3000'`)
+  console.log("Recipe app running at 'http://localhost:3000'")
 )
