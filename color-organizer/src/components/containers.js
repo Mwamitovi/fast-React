@@ -1,17 +1,17 @@
 import { connect } from 'react-redux'
+// eslint-disable-next-line
 import { compose } from 'redux'
 import ColorList from './ui/ColorList'
 import ColorDetails from './ui/ColorDetails'
 import AddColorForm from './ui/AddColorForm'
 import { addColor, rateColor, removeColor } from '../actions'
-import { findById } from '../lib/array-helpers'
-import { sortColors } from '../lib/array-helpers'
+import { findById, sortColors } from '../lib/array-helpers'
 
 export const NewColor = connect(
   null,
   dispatch =>
     ({
-      onNewColor(title, color) {
+      onNewColor (title, color) {
         dispatch(addColor(title, color))
       }
     })
@@ -22,12 +22,12 @@ export const Colors = connect(
     ({
       colors: sortColors(colors, match.params.sort)
     }),
-  dispatch => 
+  dispatch =>
     ({
-      onRemove(id) {
+      onRemove (id) {
         dispatch(removeColor(id))
       },
-      onRate(id, rating) {
+      onRate (id, rating) {
         dispatch(rateColor(id, rating))
       }
     })
