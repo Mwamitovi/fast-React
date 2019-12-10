@@ -9,11 +9,11 @@ const dispatchAndRespond = (req, res, action) => {
   res.status(200).json(action)
 }
 
-router.get("/colors", (req, res) =>
+router.get('/colors', (req, res) =>
   res.status(200).json(req.store.getState().colors)
 )
 
-router.post("/colors", (req, res) =>
+router.post('/colors', (req, res) =>
   dispatchAndRespond(req, res, {
     type: C.ADD_COLOR,
     id: v4(),
@@ -23,7 +23,7 @@ router.post("/colors", (req, res) =>
   })
 )
 
-router.put("/color/:id", (req, res) =>
+router.put('/color/:id', (req, res) =>
   dispatchAndRespond(req, res, {
     type: C.RATE_COLOR,
     id: req.params.id,
@@ -31,11 +31,11 @@ router.put("/color/:id", (req, res) =>
   })
 )
 
-router.delete("/color/:id", (req, res) =>
+router.delete('/color/:id', (req, res) =>
   dispatchAndRespond(req, res, {
     type: C.REMOVE_COLOR,
     id: req.params.id
   })
 )
 
-export default router;
+export default router
