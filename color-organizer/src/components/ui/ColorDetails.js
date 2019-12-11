@@ -18,8 +18,8 @@ const ColorDetails = ({ title, color, history, location }) => (
 )
 
 ColorDetails.propTypes = {
-  title: PropTypes.string.isRequired,
-  color: PropTypes.string.isRequired
+  title: PropTypes.string,
+  color: PropTypes.string
 }
 
 export default ColorDetails
