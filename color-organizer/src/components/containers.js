@@ -34,5 +34,8 @@ export const Colors = connect(
 )(ColorList)
 
 export const Color = connect(
-  ({ colors }, { match }) => findById(colors, match.params.id)
+  ({ colors }, { match }) =>
+    ({
+      ...findById(colors, match.params.id)
+    })
 )(ColorDetails)
