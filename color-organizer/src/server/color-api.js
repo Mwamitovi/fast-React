@@ -5,6 +5,8 @@ import { v4 } from 'uuid'
 const router = Router()
 
 const dispatchAndRespond = (req, res, action) => {
+  // dispatch action to the serverStore
+  // and send the action to client using response object
   req.store.dispatch(action)
   res.status(200).json(action)
 }
