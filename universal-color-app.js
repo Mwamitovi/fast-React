@@ -277,7 +277,7 @@ const renderComponentsToHTML = ({ url, store }) =>
 
 // The state and the html can be used in the last composed function, buildHTMLPage:
 
-const buildHTMLPage = ({ html, state, css }) => (`
+let buildHTMLPage = ({ html, state, css }) => (`
   <!DOCTYPE html>
   <html>
     <head>
@@ -357,7 +357,8 @@ const staticCSS = fs.readFileSync(
 // Now we have to modify the buildHTMLPage function to 
 // write the CSS directly to the response inside of a <style> tag:
 
-const buildHTMLPage = ({ html, state, css }) => (`
+// eslint-disable-next-line
+buildHTMLPage = ({ html, state, css }) => (`
   <!DOCTYPE html>
   <html>
     <head>
@@ -745,6 +746,9 @@ export default connectToMessageSocket;
  * However, Falcor uses JavaScript to query data, 
  * which likely means less of a learning curve for JavaScript developers.
  */
+
+// ------------------------
+
 
 // Error from node.sass, linked to ubuntu 10.04
 // ERROR in 
