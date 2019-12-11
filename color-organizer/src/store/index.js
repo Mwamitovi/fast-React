@@ -1,6 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import { colors } from './reducers'
-// eslint-disable-next-line
+import { colors } from './reducers'// eslint-disable-next-line
 import thunk from 'redux-thunk'
 
 const clientLogger = store => next => action => {
@@ -22,14 +21,13 @@ const serverLogger = store => next => action => {
   return next(action)
 }
 
-const middleware = server => // [
-  (server) ? serverLogger : clientLogger
-//   thunk
-// ]
+const middleware = server => [
+  (server) ? serverLogger : clientLogger,
+  thunk
+]
 
 const storeFactory = (server = false, initialState = {}) =>
-  // applyMiddleware(...middleware(server))(createStore)(
-  applyMiddleware(middleware)(createStore)(
+  applyMiddleware(...middleware(server))(createStore)(
     combineReducers({ colors }),
     initialState
   )
