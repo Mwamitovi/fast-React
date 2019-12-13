@@ -3,19 +3,19 @@ Fast React
 
 ## SYNOPSIS
 
-The world is reacting, and this is a series of "mini" React projects.
+The world is reacting, and this is a series of "mini" React projects.<br/>
 We look at the concepts of functional programming inorder to structure React Applications better.
 
-What's happening behind the scenes? 
+What's happening behind the scenes?<br/>
 We look at Pure React. 
 And quickly switch focus to a JavaScript extension (JSX), similar to HTML, for defining react elements.
 
-But really, what is the React advantage? 
-We dig into Data handling and Component lifecycle to answer this question.
+But really, what is the React advantage?<br/>
+We dig into Data handling and Component lifecycle to answer this question.<br/>
 Then we get on to use Redux (based on flux) to manage application state while building the UI.
 
-We also Unit test using tools like ESLint, Jest and Enzyme to verify our "app" functions.
-Plus how do we manage browser history in Single-Pages-Apps with React Router?
+We also Unit test using tools like ESLint, Jest and Enzyme to verify our "app" functions.<br/>
+Plus how do we manage browser history in Single-Pages-Apps with React Router?<br/>
 And finally, we get into React and the server (isomorphic concept, node-express and more).
 
 
@@ -45,15 +45,15 @@ And finally, we get into React and the server (isomorphic concept, node-express 
     - This project reference: Learning React (Functional Web development with React & Redux)
       available at http://bit.ly/learning-react-2e
 
-    - see [React Documentation] at (https://facebook.github.io/react/index.html)
+    - see the [React documentation](https://facebook.github.io/react/index.html)
 
-    - see [React Source] at (https://github.com/facebook/react)
+    - see the [React Source](https://github.com/facebook/react)
 
-    - see [Webpack Documentation] at (https://webpack.js.org/)
+    - see [Webpack Documentation](https://webpack.js.org/)
 
-    - see [Flux Documentation] at (https://facebook.github.io/flux/docs/overview.html)
+    - see [Flux Documentation](https://facebook.github.io/flux/docs/overview.html)
 
-    - see [Redux Documentation] at (http://redux.js.org/index.html)
+    - see [Redux Documentation](http://redux.js.org/index.html)
 
     - see [Jest Documentation] at (https://facebook.github.io/jest/)
 
