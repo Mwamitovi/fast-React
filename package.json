@@ -27,7 +27,7 @@
   "homepage": "https://github.com/MoonHighway/learning-react#readme",
   "dependencies": {
     "react": "16.0.0",
-    "react-dom": "16.0.0"
+    "react-dom": "16.0.1"
   },
   "devDependencies": {
     "opener": "1.4.3",
